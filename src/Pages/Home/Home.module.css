@@ -1,0 +1,111 @@
+.homeWrapper {
+    min-height: 90vh;
+    width: 90%;
+    display: flex;
+    border: 1px solid rgb(239, 239, 239);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.banner,
+.login
+{
+    flex: 1;
+}
+.banner {
+    background-color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.banner img {
+    width: 50%;
+}
+.banner h1 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    margin: 0;
+
+}
+.login {
+    display: flex;
+}
+.loginWrapper {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.loginWrapper h1,
+.loginWrapper p,
+.loginWrapper button,
+.loginWrapper a {
+width: 100%;
+font-family: 'Lexend Deca', sans-serif;
+
+}
+.loginWrapper h1 {
+    margin: 0;
+}
+p {
+    font-size: 13px;
+}
+.loginWrapper button { 
+    border: none;
+    background-color: rgb(255, 212, 59);
+    padding: 9px 0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.loginWrapper a {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+@media screen and (max-width: 768px) {
+    .homeWrapper {
+        flex-flow: column;
+    }
+    .loginWrapper {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .banner {
+        min-height: 125px;
+    max-height: 136px;
+    }
+    .banner img {
+        display: none;
+    }
+}
+.signUpForm {
+    width: 100%;
+}
+.signUpForm input {
+    width: calc(100% - 22px);
+    padding: 8px 10px;
+    border: .5px solid rgb(219, 219, 219);
+    border-radius: 5px;
+    margin: 5px 0;
+}
+input:focus { 
+    outline: none;
+border: 1px solid rgb(255, 212, 59);
+}
+.signInButton {
+    margin-top: 20px !important;
+    margin-bottom: 5px;
+}
+.error {
+    font-size: 14px;
+    margin-top: 10px;
+    color: red;
+}
