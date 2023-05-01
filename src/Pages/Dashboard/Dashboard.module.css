@@ -1,0 +1,146 @@
+.dashboardWrapper {
+    height: 80vh;
+    width: 90vw;
+    max-width: 1440px;
+    max-height: 1000px;
+    margin: 0 auto;
+    border: 1px solid #d2d2d2;
+    border-radius: 23px;
+    display: flex;
+        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+
+}
+.MenuWrapper {
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding: 10px;
+    width: 300px;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+    background-color: #f4f4f4;
+    /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+}
+.titleSection {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+.menuTitle {
+    font-weight: bold;
+    font-size: 22px;
+}
+.menuImage img {
+    width: 30px;
+    height: auto;
+}
+.searchBar {
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: #ebebeb;
+    border: 1px solid #cecece;
+    display: flex;
+    align-items: center;
+    padding: 0px 7px;
+}
+
+.searchImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searchImg img {
+    width: 24px;
+    height: auto;
+}
+.searchInputWrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.searchInputWrapper input {
+    width: 95%;
+    outline: unset;
+    border: unset;
+    background: unset;
+    height: 100%;
+    margin: 0 auto;
+}
+.taskTab {
+    width: 80%;
+    margin: 0 auto;
+    max-height: 100px;
+    height: 100%;
+    overflow-y: scroll;
+    margin-top: 15px;
+    padding: 10px;
+    padding-top: 0px;
+}
+.tasksTitle {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.taskList li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: .5s;
+}
+.taskList li:hover {
+    margin-left: 20px;
+    transition: .5s;
+}
+.taskList li img {
+    width: 15px;
+    margin-right: 10px;
+    height: auto;
+}
+.taskList li:nth-child(1) img {
+    width: 20px;
+    transform: translateX(-2px);
+    margin-right: 5px;
+    height: auto;
+}
+.todayTitle {
+    margin-left: 25px;
+}
+.addTask {
+    padding: 8px 15px 8px 0px;
+    width: 90%;
+    display: flex;
+    border: 1px solid rgb(229, 229, 229);
+    margin-left: 25px;
+    border-radius: 5px;
+  }
+  .addTask label {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .addTask label img{
+    width: 15px;
+    height: auto;
+  }
+  .addTask input {
+    flex: 1;
+    border: unset;
+    outline: unset;
+  }

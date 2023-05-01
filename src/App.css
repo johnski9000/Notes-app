@@ -8,3 +8,22 @@
   min-height: 100vh
 }
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+.selected_style_wrapper {
+  flex: 1;
+  background-color: #ffffff;
+  /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+  border-radius: 0 25px 25px 0;
+  border-left: 1px solid rgb(209, 209, 209);
+  padding: 10px;
+  height: 100%;
+  border-bottom: 1px solid rgb(211, 211, 211);
+
+}
+#search {
+  outline: unset !important;
+  border: unset !important;
+}
+/* * {
+  border: 1px solid red;
+} */

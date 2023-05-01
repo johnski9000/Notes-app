@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext';
 import styles from './Home.module.css'; 
 
 function Home() {
   const [first, setfirst] = useState()
+  const navigate = useNavigate()
+  const {currentUser} = useAuth()
+
+  useEffect(() => {
+      if (currentUser) {
+        navigate("/dashboard")
+      }
+  }, [currentUser])
+
   return (
     <div className={styles.homeWrapper}>
       <div className={styles.banner}>

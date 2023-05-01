@@ -15,7 +15,7 @@ function SignIn() {
     if (currentUser) {
       navigate("/dashboard")
     }
-  }, [])
+  }, [currentUser])
 
   function handleChange (event) {
     if (event.target.name === "email") {
@@ -32,7 +32,7 @@ function SignIn() {
     try {
       setLoading(true)
       await login(email, password)
-      navigate("/dashboard")
+
     } catch (error) {
       setError("Failed to log in")
     }

@@ -1,23 +1,56 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../Context/AuthContext';
-
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
+import Menu from "./Menu";
+import styles from "./Dashboard.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserData } from "../../Redux/userSlice";
+import axios from "axios";
+import SelectedTask from "./SelectedTask";
 
 function Dashboard() {
-    const {signOut, currentUser} = useAuth()
-    const navigate = useNavigate()
+  const { signOut, currentUser } = useAuth();
+  const userState = useSelector((state) => state.userData);
+  const dispatch = useDispatch();
 
+  function handleClick(data) {
+    dispatch(setUserData(data));
+  }
+  console.log(userState);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(!currentUser) {
-            navigate("/")
-        }
-    }, [])
-    
+  useEffect(() => {
+    if (userState === null & currentUser) {
+      axios
+        .get("http://localhost:8000/", {
+            params: {
+                email: currentUser.email
+              }
+        })
+        .then(function (response) {
+          // handle success
+          console.log(response);
+          handleClick(response.data)
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   return (
-    <div onClick={signOut}>Sign Out</div>
-  )
+    <div className={styles.dashboardWrapper}>
+      <Menu />
+      <SelectedTask/>
+    </div>
+  );
 }
 
-export default Dashboard
+export default Dashboard;

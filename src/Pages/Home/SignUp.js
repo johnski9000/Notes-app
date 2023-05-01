@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import styles from './Home.module.css'; 
+import axios from 'axios'
 
 function SignUp() {
   const [email, setEmail] = useState()
@@ -26,10 +27,11 @@ useEffect(() => {
   if (currentUser) {
     navigate("/dashboard")
   }
-}, [])
+}, [currentUser])
 
   async function handleSubmit (e) {
     e.preventDefault()
+    
     if (password !== confirmPassword) {
         return setError("Passwords do not match!")
     } 
@@ -37,6 +39,9 @@ useEffect(() => {
         setError(false)
         setLoading(true)
         await signUp(email, password)
+        axios.put("http://localhost:8000/", {
+          email: email
+        })
         navigate("/dashboard")
     } catch (error) {
         
@@ -53,7 +58,6 @@ useEffect(() => {
     <div className={styles.login}>
      <div className={styles.loginWrapper}>
         <h1 style={{marginBottom: "25px"}}>Sign up</h1>
-        {currentUser.email}
         <form className={styles.signUpForm} onSubmit={handleSubmit}>
           <div>
             <input name='email' type="email" placeholder="example@email.com" onChange={(event) => handleChange(event)}/>
