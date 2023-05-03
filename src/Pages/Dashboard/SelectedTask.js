@@ -6,14 +6,17 @@ import Today from './Today';
 
 function SelectedTask() {
     const userState = useSelector((state) => state);
-    const {selectedElement} = userState.userData
-    console.log(selectedElement)
+    const {selectedElement,} = userState.userData
+    const {tasksToday} = userState.userData.userData
+    console.log(userState.userData.userData.tasksToday)
 
   return (
     <div className="selected_style_wrapper">
         {
             selectedElement === "Today" && 
-            <Today />
+            <Today 
+            list={tasksToday}
+            />
         }
     </div>
   )

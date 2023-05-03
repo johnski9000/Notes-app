@@ -16,11 +16,11 @@ function Dashboard() {
   function handleClick(data) {
     dispatch(setUserData(data));
   }
-  console.log(userState);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userState === null & currentUser) {
+    if (currentUser) {
       axios
         .get("http://localhost:8000/", {
             params: {
@@ -48,7 +48,7 @@ function Dashboard() {
   return (
     <div className={styles.dashboardWrapper}>
       <Menu />
-      <SelectedTask/>
+      <SelectedTask />
     </div>
   );
 }

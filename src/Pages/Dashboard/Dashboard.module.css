@@ -129,13 +129,15 @@
     margin-left: 25px;
     border-radius: 5px;
   }
-  .addTask label {
+  .addTask button {
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: unset;
+    border: unset;
   }
-  .addTask label img{
+  .addTask button img{
     width: 15px;
     height: auto;
   }
@@ -143,4 +145,13 @@
     flex: 1;
     border: unset;
     outline: unset;
+  }
+  .todayWrapper {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+  }
+  .listWrapper {
+    padding: 20px;
+flex: 1;
   }
