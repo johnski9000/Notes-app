@@ -123,11 +123,14 @@
 }
 .addTask {
     padding: 8px 15px 8px 0px;
-    width: 90%;
+    flex: 1;
+    min-height: 20px;
+    max-height: 20px;
     display: flex;
     border: 1px solid rgb(229, 229, 229);
     margin-left: 25px;
     border-radius: 5px;
+    margin-right: 20px;
   }
   .addTask button {
     width: 50px;
@@ -146,12 +149,80 @@
     border: unset;
     outline: unset;
   }
+  .todayParentWrapper {
+    display: flex;
+    overflow-y: scroll;
+    height: 100%;
+}
   .todayWrapper {
+    flex: 1;
     height: 100%;
     display: flex;
     flex-flow: column;
+    position: relative;
   }
+  .today_task_modal {
+    flex: .7 1;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #bebaba;
+    position: relative;
+}
+.modal_title {
+    width: 100%;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal_title img {
+    position: absolute;
+    width: 20px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.modal_buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    left: 0;
+    bottom: 30px;
+    justify-content: center;
+}
+.modal_buttons button {
+    width: 40%;
+}
+.modal_buttons button:nth-child(1) {
+    margin-right: 10px;
+}
   .listWrapper {
     padding: 20px;
 flex: 1;
+overflow-y: scroll;
   }
+
+  .todayListItem {
+    padding: 10px 20px;
+border-bottom: 1px solid #d5d1d1;
+width: 91%;
+margin: 0 auto;
+font-size: 15px;
+position: relative;
+cursor: pointer;
+min-height: 25px;
+  }
+  .todayListItem div:hover {
+    transform: translateX(10px);
+    transition: 1s;
+  }
+  .todayListItem div {
+  transition: 1s;
+  }
+  .todayListItem img {
+    position: absolute;
+    width: 35px;
+    right: 0;
+    top: 5px;
+  }
+ 
