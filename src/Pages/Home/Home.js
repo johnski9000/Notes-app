@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 import styles from './Home.module.css'; 
 
 function Home() {
-  const [first, setfirst] = useState()
   const navigate = useNavigate()
   const {currentUser} = useAuth()
 

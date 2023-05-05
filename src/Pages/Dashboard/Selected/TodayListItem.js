@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from "./Dashboard.module.css";
-import right from "./back.png"
+import styles from "../Dashboard.module.css";
+import right from "../media/back.png"
 
 function TodayListItem({props, openModal}) {
 
