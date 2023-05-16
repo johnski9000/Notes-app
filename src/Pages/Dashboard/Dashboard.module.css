@@ -163,6 +163,8 @@
   }
   .today_task_modal {
     flex: .7 1;
+    display: flex;
+    flex-flow: column;
     padding: 20px;
     border-radius: 20px;
     background-color: #f4f4f4;
@@ -174,6 +176,10 @@
     position: relative;
     font-size: 20px;
     font-weight: bold;
+}
+.taskData {
+    flex: 1;
+    
 }
 .modal_title img {
     position: absolute;
