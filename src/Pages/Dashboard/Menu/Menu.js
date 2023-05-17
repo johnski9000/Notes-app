@@ -10,8 +10,12 @@ import stickyImg from "../media/sticky-note.png";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedElement } from "../../../Redux/userSlice";
 import MenuItem from "./MenuItem";
+import { useAuth } from "../../../Context/AuthContext";
+import logout from "../media/logout.png"
+
 
 function Menu() {
+  const { signOut } = useAuth();
   const [searchInput, setSearchInput] = useState();
   const userState = useSelector((state) => state);
 
@@ -78,6 +82,7 @@ function Menu() {
           ))}
         </ul>
       </TaskTab>
+      <div onClick={signOut} className={styles.logout}><img src={logout} alt="logout"/>Sign Out</div>
     </div>
   );
 }

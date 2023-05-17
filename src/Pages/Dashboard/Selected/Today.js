@@ -10,14 +10,14 @@ import close from "../media/close.png";
 import TodayTaskModal from "./TodayTaskModal";
 
 function Today() {
-  const { signOut, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const userState = useSelector((state) => state);
   const { tasksToday } = userState.userData.userData;
-  const { email } = currentUser._delegate;
+  const { email } = currentUser ? currentUser._delegate : {};
   const [data, setData] = useState();
   const [modal, setModal] = useState(null);
   const dispatch = useDispatch();
-
+  console.log(email)
   function saveUserData() {
     axios
       .get("http://localhost:8000/", {
@@ -41,18 +41,48 @@ function Today() {
     e.preventDefault();
     setData(e.target.value);
   }
+  function handleChangeModal(e) {
+    console.log(e.target.value);
+    if (e.target.name === "title") {
+      setModal(prevModal => ({
+        ...prevModal,
+        title: e.target.value
+      }));
+    } else if (e.target.name === "description") {
+      setModal(prevModal => ({
+        ...prevModal,
+        description: e.target.value
+      }));
+    }
+  }
+function saveTask(e) {
+e.preventDefault()
+axios
+        .put("http://localhost:8000/updateTask", {...modal, email})
+        .then((response) => {
+          console.log("PUT request successful:", response);
+          saveUserData()
+        })
+        .catch((error) => {
+          console.error("Error making PUT request:", error);
+        });
+}
   function submitTask(e) {
     e.preventDefault();
     const inputData = { email, data };
-    axios
-      .put("http://localhost:8000/todaysTasks", inputData)
-      .then((response) => {
-        console.log("PUT request successful:", response);
-        saveUserData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error making PUT request:", error);
-      });
+    if (data === undefined || data === "") {
+      console.error("Cannot use an empty string!");
+    } else {
+      axios
+        .put("http://localhost:8000/todaysTasks", inputData)
+        .then((response) => {
+          console.log("PUT request successful:", response);
+          saveUserData(response.data);
+        })
+        .catch((error) => {
+          console.error("Error making PUT request:", error);
+        });
+    }
   }
   function deleteTask(e) {
     e.preventDefault();
@@ -94,9 +124,12 @@ function Today() {
       </div>
       {modal && (
         <TodayTaskModal
+        saveTask={saveTask}
+        handleChangeModal={handleChangeModal}
           setModal={setModal}
           image={close}
           deleteTask={deleteTask}
+          props={modal}
         ></TodayTaskModal>
       )}
     </div>

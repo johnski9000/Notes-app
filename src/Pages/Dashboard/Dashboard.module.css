@@ -17,6 +17,7 @@
     height: 100%;
     border-radius: 25px 0 0 25px;
     background-color: #f4f4f4;
+    position: relative;
     /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
 }
 .titleSection {
@@ -161,6 +162,18 @@
     flex-flow: column;
     position: relative;
   }
+  @media screen and (max-width: 1000px) {
+    .todayParentWrapper {
+        flex-flow: column;
+    }
+    .todayWrapper {
+        max-height: 50%;
+    }
+    .taskData {
+        max-height: 80%;
+        overflow: scroll;
+    }
+}
   .today_task_modal {
     flex: .7 1;
     display: flex;
@@ -198,9 +211,16 @@
 }
 .modal_buttons button {
     width: 40%;
+    font-weight: bold;
+    padding: 4px 0;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 5px;
 }
 .modal_buttons button:nth-child(1) {
     margin-right: 10px;
+}
+.modal_buttons button:nth-child(2) {
+    background-color: rgb(255, 212, 59);
 }
   .listWrapper {
     padding: 20px;
@@ -232,3 +252,34 @@ min-height: 25px;
     top: 5px;
   }
  
+.taskTitle input{
+margin-top: 20px;
+width: 94%;
+background-color: unset;
+border: 1px solid rgb(203, 203, 203);
+color: rgb(84, 84, 84);
+padding: 8px 0px 8px 10px;
+border-radius: 7px;
+}
+.description textarea {
+    margin-top: 20px;
+width: 94%;
+background-color: unset;
+border: 1px solid rgb(203, 203, 203);
+color: rgb(84, 84, 84);
+padding: 8px 0px 8px 10px;
+border-radius: 7px;
+height: 150px;
+}
+.logout {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 25px;
+    left: 35px;
+}
+.logout img {
+    width: 20px;
+    margin-right: 5px;
+}
