@@ -24,6 +24,15 @@
   outline: unset !important;
   border: unset !important;
 }
-/* * {
-  border: 1px solid red;
-} */
+
+
+.itemCount {
+  position: absolute;
+  right: 0;
+  padding: 4px 8px;
+    background: grey;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

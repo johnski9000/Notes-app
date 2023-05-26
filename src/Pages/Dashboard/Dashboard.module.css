@@ -88,13 +88,16 @@
     font-size: 13px;
     width: 90%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .taskList {
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 .taskList li {
     margin-bottom: 10px;
@@ -192,7 +195,8 @@
 }
 .taskData {
     flex: 1;
-    
+    display: flex;
+    flex-flow: column;
 }
 .modal_title img {
     position: absolute;
@@ -226,17 +230,19 @@
     padding: 20px;
 flex: 1;
 overflow-y: scroll;
+display: flex;
+flex-flow: column;
   }
 
   .todayListItem {
     padding: 10px 20px;
 border-bottom: 1px solid #d5d1d1;
-width: 91%;
-margin: 0 auto;
+flex: 1;
 font-size: 15px;
 position: relative;
 cursor: pointer;
 min-height: 25px;
+max-height: 25px;
   }
   .todayListItem div:hover {
     transform: translateX(10px);
@@ -252,18 +258,24 @@ min-height: 25px;
     top: 5px;
   }
  
+.taskTitle {
+    display: flex;
+}
 .taskTitle input{
 margin-top: 20px;
-width: 94%;
+flex: 1;
 background-color: unset;
 border: 1px solid rgb(203, 203, 203);
 color: rgb(84, 84, 84);
 padding: 8px 0px 8px 10px;
 border-radius: 7px;
 }
+.description {
+    display: flex;
+}
 .description textarea {
     margin-top: 20px;
-width: 94%;
+flex: 1;
 background-color: unset;
 border: 1px solid rgb(203, 203, 203);
 color: rgb(84, 84, 84);
@@ -282,4 +294,7 @@ height: 150px;
 .logout img {
     width: 20px;
     margin-right: 5px;
+}
+.searchTab {
+    padding: 15px;
 }

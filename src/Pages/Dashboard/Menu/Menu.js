@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "../Dashboard.module.css";
 import menu from "../media/menu.png";
 import search from "../media/search.png";
-import TaskTab from "../Selected/TaskTab";
 import listImg from "../media/list.png";
 import rightImg from "../media/right.png";
 import calenderImg from "../media/calendar.png";
@@ -11,8 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSelectedElement } from "../../../Redux/userSlice";
 import MenuItem from "./MenuItem";
 import { useAuth } from "../../../Context/AuthContext";
-import logout from "../media/logout.png"
-
+import logout from "../media/logout.png";
 
 function Menu() {
   const { signOut } = useAuth();
@@ -62,27 +60,31 @@ function Menu() {
           />
         </div>
       </div>
-      <div className={styles.tasksTitle}>Tasks</div>
-      <TaskTab>
+      {
+        searchInput ? <div className={styles.searchTab}>searching...</div> : 
+        <div>
+        <div className={styles.tasksTitle}>Tasks</div>
         <ul className={styles.taskList}>
           {TaskItems.map((item, index) => (
             <div key={index}>
-              <MenuItem props={item} handleClick={handleClick}></MenuItem>
+              <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
             </div>
           ))}
         </ul>
-      </TaskTab>
-      <div className={styles.tasksTitle}>Lists</div>
-      <TaskTab>
+        <div className={styles.tasksTitle}>Lists</div>
         <ul className={styles.taskList}>
           {ListItems.map((item, index) => (
             <div key={index}>
-              <MenuItem props={item} handleClick={handleClick}></MenuItem>
+              <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
             </div>
           ))}
         </ul>
-      </TaskTab>
-      <div onClick={signOut} className={styles.logout}><img src={logout} alt="logout"/>Sign Out</div>
+      </div>
+      }
+      <div onClick={signOut} className={styles.logout}>
+        <img src={logout} alt="logout" />
+        Sign Out
+      </div>
     </div>
   );
 }

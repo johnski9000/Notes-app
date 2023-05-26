@@ -13,7 +13,7 @@ function Dashboard() {
 //   const userState = useSelector((state) => state.userData);
   const dispatch = useDispatch();
 
-  function handleClick(data) {
+  function updateUserData(data) {
     dispatch(setUserData(data));
   }
 
@@ -30,7 +30,7 @@ function Dashboard() {
         .then(function (response) {
           // handle success
           console.log(response);
-          handleClick(response.data)
+          updateUserData(response.data)
         })
         .catch(function (error) {
           // handle error

@@ -12,7 +12,8 @@ import TodayTaskModal from "./TodayTaskModal";
 function Today() {
   const { currentUser } = useAuth();
   const userState = useSelector((state) => state);
-  const { tasksToday } = userState.userData.userData;
+  const { TasksToday } = userState.userData.userData.collections;
+  console.log(TasksToday)
   const { email } = currentUser ? currentUser._delegate : {};
   const [data, setData] = useState();
   const [modal, setModal] = useState(null);
@@ -57,8 +58,9 @@ function Today() {
   }
 function saveTask(e) {
 e.preventDefault()
+const taskType = "TasksToday"
 axios
-        .put("http://localhost:8000/updateTask", {...modal, email})
+        .put("http://localhost:8000/updateTask", {...modal, email, taskType})
         .then((response) => {
           console.log("PUT request successful:", response);
           saveUserData()
@@ -69,12 +71,12 @@ axios
 }
   function submitTask(e) {
     e.preventDefault();
-    const inputData = { email, data };
+    const inputData = { email, data, taskType : "TasksToday" };
     if (data === undefined || data === "") {
       console.error("Cannot use an empty string!");
     } else {
       axios
-        .put("http://localhost:8000/todaysTasks", inputData)
+        .put("http://localhost:8000/setTask", inputData)
         .then((response) => {
           console.log("PUT request successful:", response);
           saveUserData(response.data);
@@ -114,8 +116,8 @@ axios
         </div>
         <div className={styles.listWrapper}>
           {" "}
-          {tasksToday &&
-            tasksToday.map((item, index) => (
+          {TasksToday &&
+            TasksToday.map((item, index) => (
               <TodayListItem props={item} openModal={openModal}>
                 item {index}
               </TodayListItem>
