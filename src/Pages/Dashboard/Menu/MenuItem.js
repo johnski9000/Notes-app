@@ -1,7 +1,9 @@
 import React  from 'react'
 
 function MenuItem({props, handleClick, state}) {
-  const {collections} = state ? state.userData.userData : 0
+  // const {collections} = state ? state.userData.userData : 0
+  const { collections } = state && state.userData ? state.userData : 0;
+
   
   function ItemCount() {
     if (props.name === "Today") {
