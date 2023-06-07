@@ -7,7 +7,7 @@ function MenuItem({props, handleClick, state}) {
     if (props.name === "Today") {
       return (
         <div className="itemCount">
-          {collections.TasksToday ? collections.TasksToday.length : "0"}
+          {collections ? collections.TasksToday.length : "0"}
         </div>
       )
     }
