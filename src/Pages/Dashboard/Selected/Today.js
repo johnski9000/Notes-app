@@ -95,7 +95,7 @@ axios
     e.preventDefault();
     const inputData = { email, data: modal.id };
     axios
-      .post("https://notes-server-lac.vercel.app//deleteTask", inputData)
+      .put("https://notes-server-lac.vercel.app//deleteTask", inputData)
       .then((response) => {
         console.log("PUT request successful:", response);
         saveUserData(response.data);
