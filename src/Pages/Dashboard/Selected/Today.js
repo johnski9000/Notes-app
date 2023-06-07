@@ -17,6 +17,7 @@ function Today() {
   const [data, setData] = useState();
   const [modal, setModal] = useState(null);
   const dispatch = useDispatch();
+
   function saveUserData() {
     axios
       .get(
@@ -53,6 +54,25 @@ function Today() {
       setModal(prevModal => ({
         ...prevModal,
         description: e.target.value
+      }));
+    }
+    else if (e.target.name === "date") {
+      setModal(prevModal => ({
+        ...prevModal,
+        date: e.target.value
+      }));
+    }
+  }
+  function submitSubTask(subTask){
+    if (modal.subTasks) {
+      setModal(prevModal => ({
+        ...prevModal,
+        subTasks: [...modal.subTasks ,subTask]
+      }));
+    } else {
+      setModal(prevModal => ({
+        ...prevModal,
+        subTasks: [subTask]
       }));
     }
   }
@@ -137,6 +157,7 @@ axios
           image={close}
           deleteTask={deleteTask}
           props={modal}
+          submitSubTask={submitSubTask}
         ></TodayTaskModal>
       )}
     </div>
@@ -144,27 +165,3 @@ axios
 }
 
 export default Today;
-
-// function convertTimestampToDate(timestamp, timezoneOffset = 1) {
-//   const { _seconds, _nanoseconds } = timestamp;
-//   const milliseconds = _seconds * 1000 + _nanoseconds / 1000000;
-//   const date = new Date(milliseconds);
-//   const utcDate = new Date(date.getTime() + timezoneOffset * 60 * 60 * 1000);
-
-//   const options = {
-//     year: "numeric",
-//     month: "long",
-//     day: "numeric",
-//     hour: "2-digit",
-//     minute: "2-digit",
-//     second: "2-digit",
-//     timeZoneName: "short",
-//   };
-
-//   return utcDate.toLocaleString("en-GB", options);
-// }
-
-//   const timestamp = { _seconds: 1683125931, _nanoseconds: 708000000 };
-//   const timezoneOffset = 1; // UTC+1
-//   const dateString = convertTimestampToDate(timestamp, timezoneOffset);
-//   console.log('Date:', dateString);

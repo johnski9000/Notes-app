@@ -8,12 +8,13 @@
     border-radius: 23px;
     display: flex;
         box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-
+overflow: hidden;
 }
 .MenuWrapper {
     border-bottom: 1px solid rgb(211, 211, 211);
     padding: 10px;
-    width: 300px;
+    width: 32%;
+    max-width: 300px;
     height: 100%;
     border-radius: 25px 0 0 25px;
     background-color: #f4f4f4;
@@ -136,6 +137,32 @@
     margin-left: 25px;
     border-radius: 5px;
     margin-right: 20px;
+  }
+  .addTaskModal {
+    padding: 8px 15px 8px 0px;
+    flex: 1;
+    min-height: 20px;
+    max-height: 20px;
+    display: flex;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 5px;
+  }
+  .addTaskModal button {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: unset;
+    border: unset;
+  }
+  .addTaskModal button img{
+    width: 15px;
+    height: auto;
+  }
+  .addTaskModal input {
+    border: unset;
+    background: unset;
+    width: 100%;
   }
   .addTaskUpcoming {
     margin: unset;
@@ -290,6 +317,28 @@ padding: 8px 0px 8px 10px;
 border-radius: 7px;
 height: 150px;
 }
+.date {
+    margin-top: 20px;
+    border: unset;
+color: rgb(84, 84, 84);
+width: fit-content;
+background: #f4f4f4;
+}
+.date input {
+    margin-left: 10px;
+    border: unset;
+color: rgb(84, 84, 84);
+width: fit-content;
+background: #f4f4f4;
+border: 1px solid rgb(203, 203, 203);
+padding: 4px;
+    border-radius: 10px;
+}
+.tags {
+    margin-top: 20px;
+    border: unset;
+color: rgb(84, 84, 84);
+}
 .logout {
     width: 100px;
     display: flex;
@@ -322,4 +371,12 @@ display: flex;
 .upcomingRowTwoChild {
     flex: 1;
     padding: 0 25px;
+}
+.subTaskWrapper {
+    height: 200px;
+    overflow: scroll;
+    padding: 15px;
+}
+.subTaskItem {
+    margin-bottom: 3px;
 }
