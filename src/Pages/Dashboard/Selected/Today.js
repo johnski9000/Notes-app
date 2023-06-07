@@ -13,15 +13,15 @@ function Today() {
   const { currentUser } = useAuth();
   const userState = useSelector((state) => state);
   const { TasksToday } = userState.userData.userData.collections;
-  console.log(TasksToday)
   const { email } = currentUser ? currentUser._delegate : {};
   const [data, setData] = useState();
   const [modal, setModal] = useState(null);
   const dispatch = useDispatch();
-  console.log(email)
   function saveUserData() {
     axios
-      .get("http://localhost:8000/", {
+      .get(
+        "https://notes-server-lac.vercel.app/"
+        , {
         params: {
           email: email,
         },
@@ -60,7 +60,10 @@ function saveTask(e) {
 e.preventDefault()
 const taskType = "TasksToday"
 axios
-        .put("http://localhost:8000/updateTask", {...modal, email, taskType})
+        .put(
+          // "http://localhost:8000/api/updateTask"
+          "https://notes-server-lac.vercel.app/updateTask"
+          , {...modal, email, taskType})
         .then((response) => {
           console.log("PUT request successful:", response);
           saveUserData()
@@ -76,7 +79,9 @@ axios
       console.error("Cannot use an empty string!");
     } else {
       axios
-        .put("http://localhost:8000/setTask", inputData)
+        .put(
+          "https://notes-server-lac.vercel.app/setTask"
+          , inputData)
         .then((response) => {
           console.log("PUT request successful:", response);
           saveUserData(response.data);
@@ -90,7 +95,7 @@ axios
     e.preventDefault();
     const inputData = { email, data: modal.id };
     axios
-      .post("http://localhost:8000/deleteTask", inputData)
+      .post("https://notes-server-lac.vercel.app//deleteTask", inputData)
       .then((response) => {
         console.log("PUT request successful:", response);
         saveUserData(response.data);
@@ -118,7 +123,7 @@ axios
           {" "}
           {TasksToday &&
             TasksToday.map((item, index) => (
-              <TodayListItem props={item} openModal={openModal}>
+              <TodayListItem props={item} key={index} openModal={openModal}>
                 item {index}
               </TodayListItem>
             ))}

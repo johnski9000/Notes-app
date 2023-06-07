@@ -1,13 +1,13 @@
 import React  from 'react'
 
 function MenuItem({props, handleClick, state}) {
-  const {collections} = state.userData.userData
+  const {collections} = state ? state.userData.userData : 0
   
   function ItemCount() {
     if (props.name === "Today") {
       return (
         <div className="itemCount">
-          {collections.TasksToday.length}
+          {collections.TasksToday ? collections.TasksToday.length : "0"}
         </div>
       )
     }

@@ -39,7 +39,7 @@ useEffect(() => {
         setError(false)
         setLoading(true)
         await signUp(email, password)
-        axios.put("http://localhost:8000/", {
+        axios.put("https://notes-server-lac.vercel.app/", {
           email: email
         })
         navigate("/dashboard")

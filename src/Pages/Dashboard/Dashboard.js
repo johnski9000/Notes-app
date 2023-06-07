@@ -10,7 +10,8 @@ import SelectedTask from "./Selected/SelectedTask";
 
 function Dashboard() {
   const { signOut, currentUser } = useAuth();
-//   const userState = useSelector((state) => state.userData);
+  // const userState = useSelector((state) => state);
+  // const {email} = userState.userData.userData.userData
   const dispatch = useDispatch();
 
   function updateUserData(data) {
@@ -22,7 +23,7 @@ function Dashboard() {
   useEffect(() => {
     if (currentUser) {
       axios
-        .get("http://localhost:8000/", {
+        .get("https://notes-server-lac.vercel.app", {
             params: {
                 email: currentUser.email
               }

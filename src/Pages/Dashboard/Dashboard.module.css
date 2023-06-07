@@ -125,7 +125,8 @@
 .todayTitle {
     margin-left: 25px;
 }
-.addTask {
+.addTask,
+.addTaskUpcoming {
     padding: 8px 15px 8px 0px;
     flex: 1;
     min-height: 20px;
@@ -136,7 +137,11 @@
     border-radius: 5px;
     margin-right: 20px;
   }
-  .addTask button {
+  .addTaskUpcoming {
+    margin: unset;
+  }
+  .addTask button,
+  .addTaskUpcoming button {
     width: 50px;
     display: flex;
     justify-content: center;
@@ -144,11 +149,13 @@
     background-color: unset;
     border: unset;
   }
-  .addTask button img{
+  .addTask button img,
+  .addTaskUpcoming button img{
     width: 15px;
     height: auto;
   }
-  .addTask input {
+  .addTask input,
+  .addTaskUpcoming input {
     flex: 1;
     border: unset;
     outline: unset;
@@ -297,4 +304,22 @@ height: 150px;
 }
 .searchTab {
     padding: 15px;
+}
+.upcomingWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.upcomingRowOne {
+    padding: 0 25px;
+flex: 1;
+}
+.upcomingRowTwo {
+flex: 1;
+display: flex;
+}
+.upcomingRowTwoChild {
+    flex: 1;
+    padding: 0 25px;
 }
