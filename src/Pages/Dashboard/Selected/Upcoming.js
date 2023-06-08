@@ -62,19 +62,20 @@ function Upcoming() {
     } else {
       if (e.target.name === "today") {
         const inputData = { email, data: today, taskType: "TasksToday" };
+        setToday("")
         const res = await sendData(inputData);
         console.log(res);
       } 
-      if (e.target.name === "tomorrow") {
+      else if (e.target.name === "tomorrow") {
         console.log("sending")
         const inputData = { email, data: tomorrow, taskType: "TasksTomorrow" };
-        sendData(inputData);
+        setTomorrow("")
         const res = await sendData(inputData);
         console.log(res);
       } 
-      if (e.target.name === "week") {
+      else if (e.target.name === "week") {
         const inputData = { email, data: week, taskType: "TasksWeek" };
-        sendData(inputData);
+        setWeek("")
         const res = await sendData(inputData);
         console.log(res);
       }
@@ -103,7 +104,7 @@ function Upcoming() {
               <button onClick={(e) => submitTask(e)}>
                 <img src={add} alt="" name="today" />
               </button>
-              <input onChange={(e) => handleChange(e)} name="today" />
+              <input value={today} onChange={(e) => handleChange(e)} name="today" />
             </div>
             <div className={styles.tasksWrapper}>
               {TasksToday &&
@@ -119,7 +120,7 @@ function Upcoming() {
                 <button onClick={(e) => submitTask(e)}>
                   <img src={add} alt="" name="tomorrow"/>
                 </button>
-                <input onChange={(e) => handleChange(e)} name="tomorrow" />
+                <input value={tomorrow} onChange={(e) => handleChange(e)} name="tomorrow" />
               </div>
               <div className={styles.tasksWrapper}>
                 {TasksTomorrow &&
@@ -134,7 +135,7 @@ function Upcoming() {
                 <button onClick={(e) => submitTask(e)}>
                   <img src={add} alt="" name="week"/>
                 </button>
-                <input onChange={(e) => handleChange(e)} name="week" />
+                <input value={week} onChange={(e) => handleChange(e)} name="week" />
               </div>
               <div className={styles.tasksWrapper}>
                 {TasksWeek &&

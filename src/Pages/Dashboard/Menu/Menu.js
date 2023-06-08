@@ -16,6 +16,7 @@ function Menu() {
   const { signOut } = useAuth();
   const [searchInput, setSearchInput] = useState();
   const userState = useSelector((state) => state);
+  const {collections} = userState.userData.userData
 
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
@@ -39,6 +40,13 @@ function Menu() {
     { name: "Calendar", image: calenderImg },
     { name: "Sticky Notes", image: stickyImg },
   ];
+  function searchItem() {
+    const flattenedArray = Object.values(collections).flatMap(array => array);
+    const lowerCaseQuery = searchInput.toLowerCase();
+  
+    const searchResults = flattenedArray.filter(item => item.title && item.title.toLowerCase().includes(lowerCaseQuery));
+    return searchResults  
+  }
 
   return (
     <div className={styles.MenuWrapper}>
@@ -61,7 +69,13 @@ function Menu() {
         </div>
       </div>
       {
-        searchInput ? <div className={styles.searchTab}>searching...</div> : 
+        searchInput ?
+         <div className={styles.searchTab}>
+          {searchItem().map((item, index) => (
+            <div key={index}>{item.title}</div>
+          ))}
+         </div>
+          : 
         <div>
         <div className={styles.tasksTitle}>Tasks</div>
         <ul className={styles.taskList}>
