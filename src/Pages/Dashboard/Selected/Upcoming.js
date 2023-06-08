@@ -24,7 +24,7 @@ function Upcoming() {
 
   function saveUserData() {
     axios
-      .get("http://localhost:8000/", {
+      .get("https://notes-server-lac.vercel.app/", {
         params: {
           email: email,
         },
@@ -42,7 +42,7 @@ function Upcoming() {
   }
   function sendData(inputData) {
     axios
-      .put("http://localhost:8000/setTask", inputData)
+      .put("https://notes-server-lac.vercel.app/setTask", inputData)
       .then((response) => {
         console.log("PUT request successful:", response);
         saveUserData(response.data);

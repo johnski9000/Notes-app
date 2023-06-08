@@ -83,6 +83,9 @@ overflow: hidden;
     padding: 10px;
     padding-top: 0px;
 }
+.taskListContainer {
+    margin-top: 50px;
+}
 .tasksTitle {
     text-transform: uppercase;
     font-weight: bold;
@@ -98,7 +101,7 @@ overflow: hidden;
     margin: 0;
     width: 90%;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 .taskList li {
     margin-bottom: 10px;
@@ -320,7 +323,7 @@ border-radius: 7px;
 height: 150px;
 }
 .date {
-    margin-top: 20px;
+    margin-top: 40px;
     border: unset;
 color: rgb(84, 84, 84);
 width: fit-content;
@@ -337,7 +340,8 @@ padding: 4px;
     border-radius: 10px;
 }
 .tags {
-    margin-top: 20px;
+    margin-top: 40px; 
+    margin-bottom: 20px;
     border: unset;
 color: rgb(84, 84, 84);
 }
@@ -391,9 +395,20 @@ gap: 10px;
     height: 200px;
     overflow: scroll;
     padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
 }
 .subTaskItem {
     margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    
+}
+.subTaskItem img {
+    width: 25px;
+    margin-right: 20px;
 }
 .tasksWrapper {
     display: flex;
@@ -402,4 +417,35 @@ gap: 10px;
     padding: 10px;
     overflow: scroll;
 
+}
+
+.addList {
+    display: flex;
+    gap: 10px;
+}
+.addListTitle {
+    flex: 1 1;
+    border: unset;
+    outline: unset;
+}
+.addListButton {
+    display: flex;
+    align-items: center;
+}
+.addListButton img {
+    width: 20px;
+    margin-right: 15px;
+}
+.addListContainer {
+    margin-top: 20px;
+    height: auto;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 20px;
+    padding: 20px;
+}
+.colorContainer {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    gap: 6px;
 }

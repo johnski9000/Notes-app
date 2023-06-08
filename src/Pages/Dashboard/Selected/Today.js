@@ -59,11 +59,13 @@ function Today() {
     else if (e.target.name === "date") {
       setModal(prevModal => ({
         ...prevModal,
-        date: e.target.value
+        dueDate: e.target.value
       }));
+      console.log(modal)
     }
   }
   function submitSubTask(subTask){
+    console.log(modal)
     if (modal.subTasks) {
       setModal(prevModal => ({
         ...prevModal,
@@ -76,12 +78,24 @@ function Today() {
       }));
     }
   }
+  function deleteSubTask(index) {
+    setModal(prevModal => {
+      const updatedSubTasks = [...prevModal.subTasks];
+      updatedSubTasks.splice(index, 1);
+      
+      return {
+        ...prevModal,
+        subTasks: updatedSubTasks
+      };
+    });
+  }
 function saveTask(e) {
 e.preventDefault()
 const taskType = "TasksToday"
 axios
         .put(
-          // "http://localhost:8000/api/updateTask"
+          // "http://localhost:8000/updateTask"
+
           "https://notes-server-lac.vercel.app/updateTask"
           , {...modal, email, taskType})
         .then((response) => {
@@ -158,6 +172,7 @@ axios
           deleteTask={deleteTask}
           props={modal}
           submitSubTask={submitSubTask}
+          deleteSubTask={deleteSubTask}
         ></TodayTaskModal>
       )}
     </div>

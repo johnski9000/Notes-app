@@ -11,13 +11,23 @@ import { setSelectedElement } from "../../../Redux/userSlice";
 import MenuItem from "./MenuItem";
 import { useAuth } from "../../../Context/AuthContext";
 import logout from "../media/logout.png";
+import add from "../media/add.png";
 
 function Menu() {
   const { signOut } = useAuth();
   const [searchInput, setSearchInput] = useState();
+  const [addList, setAddlist] = useState(false)
+  const [list, setList] = useState(
+    {
+      color: "",
+      title: "Insert Title"
+    }
+  )
+  console.log(list)
   const userState = useSelector((state) => state);
   const {collections} = userState.userData.userData
-
+  const {Lists} = collections
+  console.log(Lists)
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
   }
@@ -34,12 +44,17 @@ function Menu() {
     { name: "Calendar", image: calenderImg },
     { name: "Sticky Notes", image: stickyImg },
   ];
-  const ListItems = [
-    { name: "Upcoming", image: rightImg },
-    { name: "Today", image: listImg },
-    { name: "Calendar", image: calenderImg },
-    { name: "Sticky Notes", image: stickyImg },
+  const ListColors = [
+    '#ff0000', // Red
+    '#00ff00', // Green
+    '#0000ff', // Blue
+    '#ffff00', // Yellow
+    '#ff00ff', // Magenta
+    '#00ffff', // Cyan
+    '#ff8000', // Orange
+    '#8000ff'  // Purple
   ];
+
   function searchItem() {
     const flattenedArray = Object.values(collections).flatMap(array => array);
     const lowerCaseQuery = searchInput.toLowerCase();
@@ -77,22 +92,53 @@ function Menu() {
          </div>
           : 
         <div>
-        <div className={styles.tasksTitle}>Tasks</div>
+          <div className={styles.taskListContainer}><div className={styles.tasksTitle}>Tasks</div>
         <ul className={styles.taskList}>
           {TaskItems.map((item, index) => (
             <div key={index}>
               <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
             </div>
           ))}
-        </ul>
+        </ul></div>
+        <div className={styles.taskListContainer}>
         <div className={styles.tasksTitle}>Lists</div>
         <ul className={styles.taskList}>
-          {ListItems.map((item, index) => (
-            <div key={index}>
-              <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
+          {
+            Lists && Lists.map((item, index) => (
+              <div key={index}>
+                <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
+              </div>
+            ))
+          }
+        <div className={styles.addListButton} onClick={() => setAddlist(!addList)}><img src={add} alt="add list"/>Add List</div>
+        {
+          addList && <div className={styles.addListContainer}>
+            <div className={styles.addList}>
+            <div style={{
+              backgroundColor: list.color,
+              width: "20px",
+              height: "20px"
+            }}
+            />
+            <input type="text" className={styles.addListTitle} value={list.title} onChange={(e) => setList({...list, title:e.target.value})}/>
             </div>
-          ))}
+            <div className={styles.colorContainer}>
+              {
+                ListColors.map((item, index) => (
+                  <div onClick={() => setList({...list, color:item})} key={index} style={{
+                    backgroundColor: item,
+                    flex: "1",
+                    height: "20px",
+                    borderRadius: "4px"
+                  }}></div>
+                ))
+              }
+            </div>
+          </div>
+        }
         </ul>
+        </div>
+        
       </div>
       }
       <div onClick={signOut} className={styles.logout}>
