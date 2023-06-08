@@ -5,18 +5,22 @@ import { useAuth } from "../../../Context/AuthContext";
 import { setUserData } from "../../../Redux/userSlice";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
+import { useDispatch } from "react-redux";
 
 function Upcoming() {
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
+  const [today, setToday] = useState();
+  const [tomorrow, setTomorrow] = useState();
+  const [week, setWeek] = useState();
   const userState = useSelector((state) => state);
   const { TasksToday } = userState.userData.userData.collections;
   const { TasksTomorrow } = userState.userData.userData.collections;
   const { TasksWeek } = userState.userData.userData.collections;
 
-
   const { currentUser } = useAuth();
 
   const { email } = currentUser ? currentUser._delegate : {};
+  const dispatch = useDispatch();
 
   function saveUserData() {
     axios
@@ -29,33 +33,63 @@ function Upcoming() {
         // handle success
         console.log(response);
 
-        dispatchEvent(setUserData(response.data));
+        dispatch(setUserData(response.data));
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       });
   }
-  function submitTask(e) {
+  function sendData(inputData) {
+    axios
+      .put("http://localhost:8000/setTask", inputData)
+      .then((response) => {
+        console.log("PUT request successful:", response);
+        saveUserData(response.data);
+        return response;
+      })
+      .catch((error) => {
+        console.error("Error making PUT request:", error);
+        return error;
+      });
+  }
+  async function submitTask(e) {
     e.preventDefault();
-    const inputData = { email, data, taskType: "TasksToday" };
-    if (data === undefined || data === "") {
-      console.error("Cannot use an empty string!");
+    console.log(e.target.name);
+    if (!today && !tomorrow && !week) {
+      alert("Insert a task!");
+      return;
     } else {
-      axios
-        .put("http://localhost:8000/setTask", inputData)
-        .then((response) => {
-          console.log("PUT request successful:", response);
-          saveUserData(response.data);
-        })
-        .catch((error) => {
-          console.error("Error making PUT request:", error);
-        });
+      if (e.target.name === "today") {
+        const inputData = { email, data: today, taskType: "TasksToday" };
+        const res = await sendData(inputData);
+        console.log(res);
+      } 
+      if (e.target.name === "tomorrow") {
+        console.log("sending")
+        const inputData = { email, data: tomorrow, taskType: "TasksTomorrow" };
+        sendData(inputData);
+        const res = await sendData(inputData);
+        console.log(res);
+      } 
+      if (e.target.name === "week") {
+        const inputData = { email, data: week, taskType: "TasksWeek" };
+        sendData(inputData);
+        const res = await sendData(inputData);
+        console.log(res);
+      }
     }
   }
   function handleChange(e) {
     e.preventDefault();
-    setData(e.target.value);
+    console.log(e.target.name);
+    if (e.target.name === "today") {
+      setToday(e.target.value);
+    } else if (e.target.name === "tomorrow") {
+      setTomorrow(e.target.value);
+    } else if (e.target.name === "week") {
+      setWeek(e.target.value);
+    }
   }
 
   return (
@@ -67,9 +101,15 @@ function Upcoming() {
             <h3>Today</h3>
             <div className={styles.addTaskUpcoming}>
               <button onClick={(e) => submitTask(e)}>
-                <img src={add} alt="" />
+                <img src={add} alt="" name="today" />
               </button>
-              <input onChange={(e) => handleChange(e)} />
+              <input onChange={(e) => handleChange(e)} name="today" />
+            </div>
+            <div className={styles.tasksWrapper}>
+              {TasksToday &&
+                TasksToday.map((item, index) => (
+                  <div key={index}>{item.id}</div>
+                ))}
             </div>
           </div>
           <div className={styles.upcomingRowTwo}>
@@ -77,28 +117,31 @@ function Upcoming() {
               <h3>Tomorrow</h3>
               <div className={styles.addTaskUpcoming}>
                 <button onClick={(e) => submitTask(e)}>
-                  <img src={add} alt="" />
+                  <img src={add} alt="" name="tomorrow"/>
                 </button>
-                <input onChange={(e) => handleChange(e)} />
+                <input onChange={(e) => handleChange(e)} name="tomorrow" />
+              </div>
+              <div className={styles.tasksWrapper}>
+                {TasksTomorrow &&
+                  TasksTomorrow.map((item, index) => (
+                    <div key={index}>{item.id}</div>
+                  ))}
               </div>
             </div>
             <div className={styles.upcomingRowTwoChild}>
               <h3>This Week</h3>
               <div className={styles.addTaskUpcoming}>
                 <button onClick={(e) => submitTask(e)}>
-                  <img src={add} alt="" />
+                  <img src={add} alt="" name="week"/>
                 </button>
-                <input onChange={(e) => handleChange(e)} />
+                <input onChange={(e) => handleChange(e)} name="week" />
               </div>
-              <div>
-                {
-                  TasksWeek && TasksWeek.map((item, index) => (
-                    <div key={index}>
-                      {item.id}
-                    </div>
-                  ))
-                }
-                </div>
+              <div className={styles.tasksWrapper}>
+                {TasksWeek &&
+                  TasksWeek.map((item, index) => (
+                    <div key={index}>{item.id}</div>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

@@ -391,3 +391,9 @@ gap: 10px;
 .subTaskItem {
     margin-bottom: 3px;
 }
+.tasksWrapper {
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+    padding: 10px;
+}
