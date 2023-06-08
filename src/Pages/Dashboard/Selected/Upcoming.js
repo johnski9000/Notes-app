@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useAuth } from "../../../Context/AuthContext";
 import { setUserData } from "../../../Redux/userSlice";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 
-
 function Upcoming() {
   const [data, setData] = useState();
+  const userState = useSelector((state) => state);
+  const { TasksToday } = userState.userData.userData.collections;
+  const { TasksTomorrow } = userState.userData.userData.collections;
+  const { TasksWeek } = userState.userData.userData.collections;
+
 
   const { currentUser } = useAuth();
 
@@ -33,7 +38,7 @@ function Upcoming() {
   }
   function submitTask(e) {
     e.preventDefault();
-    const inputData = { email, data, taskType : "TasksToday" };
+    const inputData = { email, data, taskType: "TasksToday" };
     if (data === undefined || data === "") {
       console.error("Cannot use an empty string!");
     } else {
@@ -59,34 +64,43 @@ function Upcoming() {
         <h1 className={styles.todayTitle}>Upcoming</h1>
         <div className={styles.upcomingWrapper}>
           <div className={styles.upcomingRowOne}>
-          <h2 >Today</h2>
-          <div className={styles.addTaskUpcoming}>
-          <button onClick={(e) => submitTask(e)}>
-            <img src={add} alt="" />
-          </button>
-          <input onChange={(e) => handleChange(e)} />
-        </div>
+            <h3>Today</h3>
+            <div className={styles.addTaskUpcoming}>
+              <button onClick={(e) => submitTask(e)}>
+                <img src={add} alt="" />
+              </button>
+              <input onChange={(e) => handleChange(e)} />
+            </div>
           </div>
           <div className={styles.upcomingRowTwo}>
             <div className={styles.upcomingRowTwoChild}>
-            <h2 >Today</h2>
-            <div className={styles.addTaskUpcoming}>
-          <button onClick={(e) => submitTask(e)}>
-            <img src={add} alt="" />
-          </button>
-          <input onChange={(e) => handleChange(e)} />
-        </div>
+              <h3>Tomorrow</h3>
+              <div className={styles.addTaskUpcoming}>
+                <button onClick={(e) => submitTask(e)}>
+                  <img src={add} alt="" />
+                </button>
+                <input onChange={(e) => handleChange(e)} />
+              </div>
             </div>
             <div className={styles.upcomingRowTwoChild}>
-            <h2 >Today</h2>
-            <div className={styles.addTaskUpcoming}>
-          <button onClick={(e) => submitTask(e)}>
-            <img src={add} alt="" />
-          </button>
-          <input onChange={(e) => handleChange(e)} />
-        </div>
+              <h3>This Week</h3>
+              <div className={styles.addTaskUpcoming}>
+                <button onClick={(e) => submitTask(e)}>
+                  <img src={add} alt="" />
+                </button>
+                <input onChange={(e) => handleChange(e)} />
+              </div>
+              <div>
+                {
+                  TasksWeek && TasksWeek.map((item, index) => (
+                    <div key={index}>
+                      {item.id}
+                    </div>
+                  ))
+                }
+                </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -124,7 +124,7 @@ overflow: hidden;
     height: auto;
 }
 .todayTitle {
-    margin-left: 25px;
+    margin-left: 10px;
 }
 .addTask,
 .addTaskUpcoming {
@@ -220,6 +220,8 @@ overflow: hidden;
     background-color: #f4f4f4;
     border: 1px solid #bebaba;
     position: relative;
+    overflow: scroll;
+    height: 94%;
 }
 .modal_title {
     width: 100%;
@@ -240,7 +242,7 @@ overflow: hidden;
     cursor: pointer;
 }
 .modal_buttons {
-    position: absolute;
+    position: sticky;
     width: 100%;
     display: flex;
     left: 0;
@@ -363,14 +365,23 @@ color: rgb(84, 84, 84);
 .upcomingRowOne {
     padding: 0 25px;
 flex: 1;
+border: 1px solid #d2d2d2;
+border-radius: 21px;
+margin-bottom: 10px;
+overflow: scroll;
 }
 .upcomingRowTwo {
 flex: 1;
 display: flex;
+gap: 10px;
 }
 .upcomingRowTwoChild {
     flex: 1;
     padding: 0 25px;
+    border: 1px solid #d2d2d2;
+    height: 90%;
+    border-radius: 21px;
+    overflow: scroll;
 }
 .subTaskWrapper {
     height: 200px;
