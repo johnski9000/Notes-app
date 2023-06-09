@@ -47,8 +47,7 @@ useEffect(() => {
         
     }
   }
-  console.log(currentUser)
-
+ 
   return (
     <div className={styles.homeWrapper}>
     <div className={styles.banner}>

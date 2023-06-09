@@ -44,7 +44,7 @@ function Today() {
     setData(e.target.value);
   }
   function handleChangeModal(e) {
-    console.log(e.target.value);
+    console.log(e.target.name);
     if (e.target.name === "title") {
       setModal(prevModal => ({
         ...prevModal,
@@ -60,6 +60,12 @@ function Today() {
       setModal(prevModal => ({
         ...prevModal,
         dueDate: e.target.value
+      }));
+      console.log(modal)
+    } else if (e.target.name === "lists") {
+      setModal(prevModal => ({
+        ...prevModal,
+        list: e.target.value
       }));
       console.log(modal)
     }
@@ -94,9 +100,9 @@ e.preventDefault()
 const taskType = "TasksToday"
 axios
         .put(
-          // "http://localhost:8000/updateTask"
+          "http://localhost:8000/updateTask"
 
-          "https://notes-server-lac.vercel.app/updateTask"
+          // "https://notes-server-lac.vercel.app/updateTask"
           , {...modal, email, taskType})
         .then((response) => {
           console.log("PUT request successful:", response);
@@ -173,6 +179,7 @@ axios
           props={modal}
           submitSubTask={submitSubTask}
           deleteSubTask={deleteSubTask}
+          lists={userState.userData.userData.collections.Lists}
         ></TodayTaskModal>
       )}
     </div>

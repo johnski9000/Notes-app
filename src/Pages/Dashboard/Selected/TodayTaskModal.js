@@ -12,10 +12,11 @@ function TodayTaskModal({
   deleteTask,
   props,
   submitSubTask,
-  deleteSubTask
+  deleteSubTask,
+  lists
 }) {
   const [subTask, setSubTask] = useState();
-
+  console.log(lists)
   function handleChange(e) {
     setSubTask(e.target.value);
   }
@@ -56,13 +57,16 @@ function TodayTaskModal({
           />{" "}
         </div>
         <div className={styles.tags}>
-        <label for="cars">Choose a list:</label>
+        <label for="lists">Choose a list:</label>
 
-<select name="cars" id="cars">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
+<select name="lists" id="lists" value={props.list}  onChange={(e) => handleChangeModal(e)}>
+  {
+    lists && lists.map((item, index) => (
+      <option key={index} name="list">
+        {item.title}
+      </option>
+    ))
+  }
 </select>
         </div>
         <div>

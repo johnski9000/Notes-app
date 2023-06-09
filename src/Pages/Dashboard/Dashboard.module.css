@@ -1,5 +1,5 @@
 .dashboardWrapper {
-    height: 80vh;
+    height: 90vh;
     width: 90vw;
     max-width: 1440px;
     max-height: 1000px;
@@ -13,8 +13,7 @@ overflow: hidden;
 .MenuWrapper {
     border-bottom: 1px solid rgb(211, 211, 211);
     padding: 10px;
-    width: 32%;
-    max-width: 300px;
+    min-width: 250px;
     height: 100%;
     border-radius: 25px 0 0 25px;
     background-color: #f4f4f4;
@@ -84,7 +83,7 @@ overflow: hidden;
     padding-top: 0px;
 }
 .taskListContainer {
-    margin-top: 50px;
+    margin-top: 25px;
 }
 .tasksTitle {
     text-transform: uppercase;
@@ -350,7 +349,7 @@ color: rgb(84, 84, 84);
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 25px;
+    bottom: 45px;
     left: 35px;
 }
 .logout img {
@@ -421,12 +420,14 @@ gap: 10px;
 
 .addList {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 .addListTitle {
-    flex: 1 1;
+    width: 100%;
     border: unset;
     outline: unset;
+    background-color: unset;
 }
 .addListButton {
     display: flex;
@@ -448,4 +449,23 @@ gap: 10px;
     width: 100%;
     display: flex;
     gap: 6px;
+}
+
+.addList img {
+    width: 25px;
+    height: auto;
+}
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.listItemColor {
+    width: 20px;
+    height: 20px;
+}
+.listContainer {
+    max-height: 100px;
+    overflow: scroll;
 }

@@ -1,6 +1,9 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+import { setUserData } from '../../Redux/userSlice';
 import styles from './Home.module.css'; 
 
 function SignIn() {
@@ -10,10 +13,32 @@ function SignIn() {
   const [error, setError] = useState(false)
   const {login, currentUser} = useAuth()
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  function updateUserData(data) {
+    dispatch(setUserData(data));
+  }
+
 
   useEffect(() => {
     if (currentUser) {
-      navigate("/dashboard")
+      axios
+        .get("https://notes-server-lac.vercel.app", {
+            params: {
+                email: currentUser.email
+              }
+        })
+        .then(async function (response) {
+          // handle success
+          console.log(response);
+          await updateUserData(response.data)
+            navigate("/dashboard");
+          
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
     }
   }, [currentUser])
 

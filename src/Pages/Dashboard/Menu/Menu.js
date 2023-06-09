@@ -12,22 +12,24 @@ import MenuItem from "./MenuItem";
 import { useAuth } from "../../../Context/AuthContext";
 import logout from "../media/logout.png";
 import add from "../media/add.png";
+import submit from "../media/arrow-right.png";
+import axios from "axios";
+import { setUserData } from "../../../Redux/userSlice";
+import remove from "../media/x-button.png"
 
 function Menu() {
-  const { signOut } = useAuth();
+  const { signOut, currentUser } = useAuth();
+  const { email } = currentUser ? currentUser._delegate : {};
+
   const [searchInput, setSearchInput] = useState();
-  const [addList, setAddlist] = useState(false)
-  const [list, setList] = useState(
-    {
-      color: "",
-      title: "Insert Title"
-    }
-  )
-  console.log(list)
+  const [addList, setAddlist] = useState(false);
+  const [list, setList] = useState({
+    color: "",
+    title: "Insert Title",
+  });
   const userState = useSelector((state) => state);
-  const {collections} = userState.userData.userData
-  const {Lists} = collections
-  console.log(Lists)
+  const { collections } = userState.userData.userData;
+  const { Lists } = collections;
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
   }
@@ -45,22 +47,63 @@ function Menu() {
     { name: "Sticky Notes", image: stickyImg },
   ];
   const ListColors = [
-    '#ff0000', // Red
-    '#00ff00', // Green
-    '#0000ff', // Blue
-    '#ffff00', // Yellow
-    '#ff00ff', // Magenta
-    '#00ffff', // Cyan
-    '#ff8000', // Orange
-    '#8000ff'  // Purple
+    "#ff0000", // Red
+    "#00ff00", // Green
+    "#0000ff", // Blue
+    "#ffff00", // Yellow
+    "#ff00ff", // Magenta
+    "#00ffff", // Cyan
+    "#ff8000", // Orange
+    "#8000ff", // Purple
   ];
 
   function searchItem() {
-    const flattenedArray = Object.values(collections).flatMap(array => array);
+    const flattenedArray = Object.values(collections).flatMap((array) => array);
     const lowerCaseQuery = searchInput.toLowerCase();
-  
-    const searchResults = flattenedArray.filter(item => item.title && item.title.toLowerCase().includes(lowerCaseQuery));
-    return searchResults  
+
+    const searchResults = flattenedArray.filter(
+      (item) => item.title && item.title.toLowerCase().includes(lowerCaseQuery)
+    );
+    return searchResults;
+  }
+  function saveUserData() {
+    axios
+      .get(
+        "https://notes-server-lac.vercel.app/"
+        , {
+        params: {
+          email: email,
+        },
+      })
+      .then(function (response) {
+        // handle success
+        console.log(response);
+
+        dispatch(setUserData(response.data));
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  }
+  function submitList() {
+    axios
+      .put("http://localhost:8000/submitList", {
+        params: {
+          email: email,
+          color: list.color,
+          title: list.title,
+        },
+      })
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        saveUserData()
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }
 
   return (
@@ -83,64 +126,94 @@ function Menu() {
           />
         </div>
       </div>
-      {
-        searchInput ?
-         <div className={styles.searchTab}>
+      {searchInput ? (
+        <div className={styles.searchTab}>
           {searchItem().map((item, index) => (
             <div key={index}>{item.title}</div>
           ))}
-         </div>
-          : 
-        <div>
-          <div className={styles.taskListContainer}><div className={styles.tasksTitle}>Tasks</div>
-        <ul className={styles.taskList}>
-          {TaskItems.map((item, index) => (
-            <div key={index}>
-              <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
-            </div>
-          ))}
-        </ul></div>
-        <div className={styles.taskListContainer}>
-        <div className={styles.tasksTitle}>Lists</div>
-        <ul className={styles.taskList}>
-          {
-            Lists && Lists.map((item, index) => (
-              <div key={index}>
-                <MenuItem props={item} state={userState} handleClick={handleClick}></MenuItem>
-              </div>
-            ))
-          }
-        <div className={styles.addListButton} onClick={() => setAddlist(!addList)}><img src={add} alt="add list"/>Add List</div>
-        {
-          addList && <div className={styles.addListContainer}>
-            <div className={styles.addList}>
-            <div style={{
-              backgroundColor: list.color,
-              width: "20px",
-              height: "20px"
-            }}
-            />
-            <input type="text" className={styles.addListTitle} value={list.title} onChange={(e) => setList({...list, title:e.target.value})}/>
-            </div>
-            <div className={styles.colorContainer}>
-              {
-                ListColors.map((item, index) => (
-                  <div onClick={() => setList({...list, color:item})} key={index} style={{
-                    backgroundColor: item,
-                    flex: "1",
-                    height: "20px",
-                    borderRadius: "4px"
-                  }}></div>
-                ))
-              }
-            </div>
-          </div>
-        }
-        </ul>
         </div>
-        
-      </div>
-      }
+      ) : (
+        <div>
+          <div className={styles.taskListContainer}>
+            <div className={styles.tasksTitle}>Tasks</div>
+            <ul className={styles.taskList}>
+              {TaskItems.map((item, index) => (
+                <div key={index}>
+                  <MenuItem
+                    props={item}
+                    state={userState}
+                    handleClick={handleClick}
+                  ></MenuItem>
+                </div>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.taskListContainer}>
+            <div className={styles.tasksTitle}>Lists</div>
+            <ul className={styles.taskList}>
+              <div className={styles.listContainer}>
+                 {Lists &&
+                Lists.map((item, index) => (
+                  <div key={index} className={styles.listItem}>
+                    <div className={styles.listItemColor} style={{
+                    backgroundColor: item.color
+                  }}></div>
+                    <div className={styles.listItemTitle}>{item.title}</div>
+                  </div>
+                ))}
+              </div>
+             
+              <div
+                className={styles.addListButton}
+                onClick={() => setAddlist(!addList)}
+              >
+                <img src={add} alt="add list" />
+                Add List
+              </div>
+              {addList && (
+                <div className={styles.addListContainer}>
+                  <div className={styles.addList}>
+                    <div
+                      style={{
+                        backgroundColor: list.color,
+                        minWidth: "20px",
+                        height: "20px",
+                      }}
+                    />
+                    <input
+                      type="text"
+                      className={styles.addListTitle}
+                      value={list.title}
+                      onChange={(e) =>
+                        setList({ ...list, title: e.target.value })
+                      }
+                    />
+                    <img
+                      src={submit}
+                      alt="submit list"
+                      onClick={(e) => submitList(e)}
+                    />
+                  </div>
+                  <div className={styles.colorContainer}>
+                    {ListColors.map((item, index) => (
+                      <div
+                        onClick={() => setList({ ...list, color: item })}
+                        key={index}
+                        style={{
+                          backgroundColor: item,
+                          flex: "1",
+                          height: "20px",
+                          borderRadius: "4px",
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
       <div onClick={signOut} className={styles.logout}>
         <img src={logout} alt="logout" />
         Sign Out
