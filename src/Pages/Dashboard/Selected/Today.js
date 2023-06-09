@@ -100,9 +100,9 @@ e.preventDefault()
 const taskType = "TasksToday"
 axios
         .put(
-          "http://localhost:8000/updateTask"
+          // "http://localhost:8000/updateTask"
 
-          // "https://notes-server-lac.vercel.app/updateTask"
+          "https://notes-server-lac.vercel.app/updateTask"
           , {...modal, email, taskType})
         .then((response) => {
           console.log("PUT request successful:", response);
