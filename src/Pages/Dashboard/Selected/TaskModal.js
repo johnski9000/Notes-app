@@ -56,7 +56,7 @@ function TaskModal({
           />{" "}
         </div>
         <div className={styles.tags}>
-        <label for="lists">Choose a list:</label>
+        <label htmlFor="lists">Choose a list:</label>
 
         <select name="lists" id="lists" value={props.list || ""} onChange={(e) => handleChangeModal(e)}>
   {

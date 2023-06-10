@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import Upcoming from "./Upcoming";
 import StickyNotes from "./StickyNotes";
 import Today from "./Today";
-import TaskModal from "./TodayTaskModal";
+import TaskModal from "./TaskModal";
 import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
 import close from "../media/close.png";
@@ -83,19 +83,17 @@ function SelectedTask({ currentUser }) {
     });
   }
   function openModal(data) {
-    console.log(data)
     setModal(null);
     setModal(data);
   }
   function saveTask(e) {
     e.preventDefault();
-    const taskType = "TasksToday";
     axios
       .put(
-        // "http://localhost:8000/updateTask"
+        "http://localhost:8000/updateTask",
 
-        "https://notes-server-lac.vercel.app/updateTask",
-        { ...modal, email, taskType }
+        // "https://notes-server-lac.vercel.app/updateTask",
+        { ...modal, email }
       )
       .then((response) => {
         console.log("PUT request successful:", response);

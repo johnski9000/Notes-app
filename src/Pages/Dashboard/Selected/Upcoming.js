@@ -6,6 +6,7 @@ import { setUserData } from "../../../Redux/userSlice";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 import { useDispatch } from "react-redux";
+import TaskItem from "./TaskItem";
 
 function Upcoming({openModal, saveUserData}) {
   // const [data, setData] = useState();
@@ -109,7 +110,7 @@ function Upcoming({openModal, saveUserData}) {
             <div className={styles.tasksWrapper}>
               {TasksToday &&
                 TasksToday.map((item, index) => (
-                  <div key={index} onClick={() => openModal(item)}>{item.id}</div>
+                  <TaskItem props={item} key={index}  openModal={openModal} taskType="TasksToday"></TaskItem>
                 ))}
             </div>
           </div>
@@ -125,7 +126,7 @@ function Upcoming({openModal, saveUserData}) {
               <div className={styles.tasksWrapper}>
                 {TasksTomorrow &&
                   TasksTomorrow.map((item, index) => (
-                    <div key={index} onClick={() => openModal(item)}>{item.id}</div>
+                    <TaskItem props={item} key={index}  openModal={openModal}  taskType="TasksTomorrow"></TaskItem>
                   ))}
               </div>
             </div>
@@ -140,7 +141,7 @@ function Upcoming({openModal, saveUserData}) {
               <div className={styles.tasksWrapper}>
                 {TasksWeek &&
                   TasksWeek.map((item, index) => (
-                    <div key={index} onClick={() => openModal(item)}>{item.id}</div>
+                    <TaskItem props={item} key={index} openModal={openModal} taskType="TasksWeek"></TaskItem>
                   ))}
               </div>
             </div>

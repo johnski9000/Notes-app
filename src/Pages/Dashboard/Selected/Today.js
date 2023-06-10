@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 import { useDispatch, useSelector } from "react-redux";
-import TodayListItem from "./TodayListItem";
+import TaskItem from "./TaskItem";
 import axios from "axios";
 import { useAuth } from "../../../Context/AuthContext";
 // import { setUserData } from "../../../Redux/userSlice";
@@ -164,9 +164,9 @@ function Today({openModal, saveUserData}) {
           {" "}
           {TasksToday &&
             TasksToday.map((item, index) => (
-              <TodayListItem props={item} key={index} openModal={openModal}>
+              <TaskItem props={item} key={index} openModal={openModal} taskType="TasksToday">
                 item {index}
-              </TodayListItem>
+              </TaskItem>
             ))}
         </div>
       </div>
