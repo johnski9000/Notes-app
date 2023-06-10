@@ -90,9 +90,9 @@ function SelectedTask({ currentUser }) {
     e.preventDefault();
     axios
       .put(
-        "http://localhost:8000/updateTask",
+        // "http://localhost:8000/updateTask",
 
-        // "https://notes-server-lac.vercel.app/updateTask",
+        "https://notes-server-lac.vercel.app/updateTask",
         { ...modal, email }
       )
       .then((response) => {
