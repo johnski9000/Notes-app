@@ -10,8 +10,8 @@ import SelectedTask from "./Selected/SelectedTask";
 
 function Dashboard() {
   const { signOut, currentUser } = useAuth();
-  // const userState = useSelector((state) => state);
-  // const {email} = userState.userData.userData.userData
+  const userState = useSelector((state) => state);
+  const {email} = userState.userData.userData.userData
   const dispatch = useDispatch();
 
   function updateUserData(data) {
@@ -49,7 +49,7 @@ function Dashboard() {
   return (
     <div className={styles.dashboardWrapper}>
       <Menu />
-      <SelectedTask />
+      <SelectedTask currentUser={currentUser}/>
     </div>
   );
 }

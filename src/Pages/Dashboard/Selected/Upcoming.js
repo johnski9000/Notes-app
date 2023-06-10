@@ -7,7 +7,7 @@ import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 import { useDispatch } from "react-redux";
 
-function Upcoming() {
+function Upcoming({openModal, saveUserData}) {
   // const [data, setData] = useState();
   const [today, setToday] = useState();
   const [tomorrow, setTomorrow] = useState();
@@ -22,24 +22,24 @@ function Upcoming() {
   const { email } = currentUser ? currentUser._delegate : {};
   const dispatch = useDispatch();
 
-  function saveUserData() {
-    axios
-      .get("https://notes-server-lac.vercel.app/", {
-        params: {
-          email: email,
-        },
-      })
-      .then(function (response) {
-        // handle success
-        console.log(response);
+  // function saveUserData() {
+  //   axios
+  //     .get("https://notes-server-lac.vercel.app/", {
+  //       params: {
+  //         email: email,
+  //       },
+  //     })
+  //     .then(function (response) {
+  //       // handle success
+  //       console.log(response);
 
-        dispatch(setUserData(response.data));
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }
+  //       dispatch(setUserData(response.data));
+  //     })
+  //     .catch(function (error) {
+  //       // handle error
+  //       console.log(error);
+  //     });
+  // }
   function sendData(inputData) {
     axios
       .put("https://notes-server-lac.vercel.app/setTask", inputData)
@@ -109,7 +109,7 @@ function Upcoming() {
             <div className={styles.tasksWrapper}>
               {TasksToday &&
                 TasksToday.map((item, index) => (
-                  <div key={index}>{item.id}</div>
+                  <div key={index} onClick={() => openModal(item)}>{item.id}</div>
                 ))}
             </div>
           </div>
@@ -125,7 +125,7 @@ function Upcoming() {
               <div className={styles.tasksWrapper}>
                 {TasksTomorrow &&
                   TasksTomorrow.map((item, index) => (
-                    <div key={index}>{item.id}</div>
+                    <div key={index} onClick={() => openModal(item)}>{item.id}</div>
                   ))}
               </div>
             </div>
@@ -140,13 +140,14 @@ function Upcoming() {
               <div className={styles.tasksWrapper}>
                 {TasksWeek &&
                   TasksWeek.map((item, index) => (
-                    <div key={index}>{item.id}</div>
+                    <div key={index} onClick={() => openModal(item)}>{item.id}</div>
                   ))}
               </div>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

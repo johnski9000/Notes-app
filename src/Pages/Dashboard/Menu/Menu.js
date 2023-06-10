@@ -30,6 +30,7 @@ function Menu() {
   const userState = useSelector((state) => state);
   const { collections } = userState.userData.userData;
   const { Lists } = collections;
+  
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
   }

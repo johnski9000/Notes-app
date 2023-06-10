@@ -196,7 +196,7 @@ overflow: hidden;
 }
   .todayWrapper {
     flex: 1;
-    height: 90%;
+    height: 98%;
     display: flex;
     flex-flow: column;
     position: relative;
@@ -214,16 +214,18 @@ overflow: hidden;
     }
 }
   .today_task_modal {
-    flex: .7 1;
+    width: 250px;
     display: flex;
     flex-flow: column;
     padding: 20px;
     border-radius: 20px;
     background-color: #f4f4f4;
     border: 1px solid #bebaba;
-    position: relative;
+    position: absolute;
     overflow: scroll;
-    height: 94%;
+    height: 88%;
+    top: 1.5%;
+    right: 1%;
 }
 .modal_title {
     width: 100%;
@@ -319,7 +321,7 @@ border: 1px solid rgb(203, 203, 203);
 color: rgb(84, 84, 84);
 padding: 8px 0px 8px 10px;
 border-radius: 7px;
-height: 150px;
+height: 75px;
 }
 .date {
     margin-top: 40px;
@@ -367,7 +369,7 @@ color: rgb(84, 84, 84);
 }
 .upcomingRowOne {
     padding: 0 25px;
-flex: 1;
+flex: .8;
 border: 1px solid #d2d2d2;
 border-radius: 21px;
 margin-bottom: 10px;
