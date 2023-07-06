@@ -11,9 +11,10 @@
 overflow: hidden;
 }
 .MenuWrapper {
+    align-self: flex-end;
     border-bottom: 1px solid rgb(211, 211, 211);
     padding: 10px;
-    min-width: 250px;
+    width: 250px;
     height: 100%;
     border-radius: 25px 0 0 25px;
     background-color: #f4f4f4;
@@ -190,6 +191,7 @@ overflow: hidden;
     outline: unset;
   }
   .todayParentWrapper {
+    flex: 1;
     display: flex;
     overflow-y: scroll;
     height: 100%;

@@ -10,6 +10,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
 
 .selected_style_wrapper {
+  display: flex;
+  gap: 10px;
   position: relative;
   width: 100%;
   background-color: #ffffff;
@@ -19,6 +21,7 @@
   padding: 10px;
   height: 100%;
   border-bottom: 1px solid rgb(211, 211, 211);
+  padding-left: 0;
 
 }
 #search {

@@ -49,7 +49,7 @@ function Dashboard() {
   return (
     <div className={styles.dashboardWrapper}>
       {
-        userState.userData.userData ? <> <Menu/>
+        userState.userData.userData ? <> 
         <SelectedElement/>
         </> :
         <div>loading...</div>

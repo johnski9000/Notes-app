@@ -17,7 +17,7 @@ import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
 import remove from "../media/x-button.png";
 
-function Menu() {
+function Menu({openModal}) {
   const { signOut, currentUser } = useAuth();
   const { email } = currentUser ? currentUser._delegate : {};
   const [searchInput, setSearchInput] = useState();
@@ -128,7 +128,7 @@ function Menu() {
       {searchInput ? (
         <div className={styles.searchTab}>
           {searchItem().map((item, index) => (
-            <div key={index}>{item.title}</div>
+            <div key={index} onClick={() => openModal(item)}>{item.title}</div>
           ))}
         </div>
       ) : (

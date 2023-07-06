@@ -10,6 +10,7 @@ import { setUserData } from "../../../Redux/userSlice";
 import close from "../media/close.png";
 import { useAuth } from "../../../Context/AuthContext";
 import List from "./List";
+import Menu from "../Menu/Menu";
 
 function SelectedElement() {
   const {currentUser } = useAuth();
@@ -91,6 +92,7 @@ function SelectedElement() {
   function openModal(data) {
     setModal(null);
     setModal(data);
+    console.log(data)
   }
   function saveTask(e) {
     e.preventDefault();
@@ -127,6 +129,7 @@ function SelectedElement() {
 
   return (
     <div className="selected_style_wrapper">
+      <Menu openModal={openModal} saveUserData={saveUserData}/>
       {selectedElement === "Upcoming" && userState ? <Upcoming openModal={openModal} saveUserData={saveUserData}/> : null}
       {selectedElement === "Today" && userState ? (
         <Today openModal={openModal} saveUserData={saveUserData} />
