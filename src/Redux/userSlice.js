@@ -5,7 +5,8 @@ export const userSlice = createSlice({
   name: 'userData',
   initialState: {
     userData: Cookies.get("userData") ? JSON.parse(Cookies.get('userData')) : null,
-    selectedElement: Cookies.get("selectedElement") ? JSON.parse(Cookies.get('selectedElement')) : null
+    selectedElement: Cookies.get("selectedElement") ? JSON.parse(Cookies.get('selectedElement')) : null,
+    modal: Cookies.get("modal") ? JSON.parse(Cookies.get('modal')) : null
   },
   reducers: {
     setUserData: (state, action) => {
@@ -17,7 +18,10 @@ export const userSlice = createSlice({
         state.selectedElement = action.payload
         Cookies.set('selectedElement', JSON.stringify(action.payload), { expires: 7 })
     },
-
+    setModal: (state, action) => {
+      state.modal = action.payload
+      Cookies.set('modal', JSON.stringify(action.payload), { expires: 7 })
+  },
   }
 })
 

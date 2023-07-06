@@ -50,9 +50,11 @@ function Dashboard() {
     <div className={styles.dashboardWrapper}>
       {
         userState.userData.userData ? <> <Menu/>
-        <SelectedElement/></> :
+        <SelectedElement/>
+        </> :
         <div>loading...</div>
       }
+
     </div>
   );
 }

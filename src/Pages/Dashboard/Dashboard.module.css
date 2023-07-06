@@ -205,9 +205,6 @@ overflow: hidden;
     .todayParentWrapper {
         flex-flow: column;
     }
-    .todayWrapper {
-        max-height: 50%;
-    }
     .taskData {
         max-height: 80%;
         overflow: scroll;

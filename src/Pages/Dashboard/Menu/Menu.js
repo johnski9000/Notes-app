@@ -15,7 +15,7 @@ import add from "../media/add.png";
 import submit from "../media/arrow-right.png";
 import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
-import remove from "../media/x-button.png"
+import remove from "../media/x-button.png";
 
 function Menu() {
   const { signOut, currentUser } = useAuth();
@@ -27,11 +27,11 @@ function Menu() {
     title: "Insert Title",
   });
   const userState = useSelector((state) => state);
-  console.log(userState.userData)
+  console.log(userState.userData);
 
   const { collections } = userState.userData.userData;
   const { Lists } = collections;
-  
+
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
   }
@@ -69,9 +69,7 @@ function Menu() {
   }
   function saveUserData() {
     axios
-      .get(
-        "https://notes-server-lac.vercel.app/"
-        , {
+      .get("https://notes-server-lac.vercel.app/", {
         params: {
           email: email,
         },
@@ -99,7 +97,7 @@ function Menu() {
       .then(function (response) {
         // handle success
         console.log(response);
-        saveUserData()
+        saveUserData();
       })
       .catch(function (error) {
         // handle error
@@ -153,17 +151,24 @@ function Menu() {
             <div className={styles.tasksTitle}>Lists</div>
             <ul className={styles.taskList}>
               <div className={styles.listContainer}>
-                 {Lists &&
-                Lists.map((item, index) => (
-                  <div key={index} className={styles.listItem} onClick={() => handleClick("List"+item.title)}>
-                    <div className={styles.listItemColor} style={{
-                    backgroundColor: item.color
-                  }}></div>
-                    <div className={styles.listItemTitle}>{item.title}</div>
-                  </div>
-                ))}
+                {Lists &&
+                  Lists.map((item, index) => (
+                    <div
+                      key={index}
+                      className={styles.listItem}
+                      onClick={() => handleClick("List" + item.title)}
+                    >
+                      <div
+                        className={styles.listItemColor}
+                        style={{
+                          backgroundColor: item.color,
+                        }}
+                      ></div>
+                      <div className={styles.listItemTitle}>{item.title}</div>
+                    </div>
+                  ))}
               </div>
-             
+
               <div
                 className={styles.addListButton}
                 onClick={() => setAddlist(!addList)}
