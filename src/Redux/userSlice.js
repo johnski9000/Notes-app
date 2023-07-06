@@ -16,7 +16,8 @@ export const userSlice = createSlice({
     setSelectedElement: (state, action) => {
         state.selectedElement = action.payload
         Cookies.set('selectedElement', JSON.stringify(action.payload), { expires: 7 })
-    }
+    },
+
   }
 })
 

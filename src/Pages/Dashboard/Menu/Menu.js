@@ -20,7 +20,6 @@ import remove from "../media/x-button.png"
 function Menu() {
   const { signOut, currentUser } = useAuth();
   const { email } = currentUser ? currentUser._delegate : {};
-
   const [searchInput, setSearchInput] = useState();
   const [addList, setAddlist] = useState(false);
   const [list, setList] = useState({
@@ -28,6 +27,8 @@ function Menu() {
     title: "Insert Title",
   });
   const userState = useSelector((state) => state);
+  console.log(userState.userData)
+
   const { collections } = userState.userData.userData;
   const { Lists } = collections;
   
@@ -39,7 +40,6 @@ function Menu() {
 
   function handleClick(data) {
     dispatch(setSelectedElement(data));
-    console.log(userState);
   }
   const TaskItems = [
     { name: "Upcoming", image: rightImg },
@@ -155,7 +155,7 @@ function Menu() {
               <div className={styles.listContainer}>
                  {Lists &&
                 Lists.map((item, index) => (
-                  <div key={index} className={styles.listItem}>
+                  <div key={index} className={styles.listItem} onClick={() => handleClick("List"+item.title)}>
                     <div className={styles.listItemColor} style={{
                     backgroundColor: item.color
                   }}></div>

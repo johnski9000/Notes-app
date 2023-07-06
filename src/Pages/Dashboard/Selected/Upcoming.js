@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import TaskItem from "./TaskItem";
 
 function Upcoming({openModal, saveUserData}) {
-  // const [data, setData] = useState();
   const [today, setToday] = useState();
   const [tomorrow, setTomorrow] = useState();
   const [week, setWeek] = useState();
@@ -23,24 +22,7 @@ function Upcoming({openModal, saveUserData}) {
   const { email } = currentUser ? currentUser._delegate : {};
   const dispatch = useDispatch();
 
-  // function saveUserData() {
-  //   axios
-  //     .get("https://notes-server-lac.vercel.app/", {
-  //       params: {
-  //         email: email,
-  //       },
-  //     })
-  //     .then(function (response) {
-  //       // handle success
-  //       console.log(response);
 
-  //       dispatch(setUserData(response.data));
-  //     })
-  //     .catch(function (error) {
-  //       // handle error
-  //       console.log(error);
-  //     });
-  // }
   function sendData(inputData) {
     axios
       .put("https://notes-server-lac.vercel.app/setTask", inputData)

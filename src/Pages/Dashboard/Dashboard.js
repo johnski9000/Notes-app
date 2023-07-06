@@ -6,10 +6,10 @@ import styles from "./Dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "../../Redux/userSlice";
 import axios from "axios";
-import SelectedTask from "./Selected/SelectedTask";
+import SelectedElement from "./Selected/SelectedElement";
 
 function Dashboard() {
-  const { signOut, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const userState = useSelector((state) => state);
   // const {email} = userState.userData.userData && userState.userData.userData.userData
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ function Dashboard() {
     <div className={styles.dashboardWrapper}>
       {
         userState.userData.userData ? <> <Menu/>
-        <SelectedTask currentUser={currentUser}/></> :
+        <SelectedElement/></> :
         <div>loading...</div>
       }
     </div>

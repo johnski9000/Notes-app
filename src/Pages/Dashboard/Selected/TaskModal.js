@@ -59,6 +59,9 @@ function TaskModal({
         <label htmlFor="lists">Choose a list:</label>
 
         <select name="lists" id="lists" value={props.list || ""} onChange={(e) => handleChangeModal(e)}>
+        <option>
+        Select a list
+      </option>
   {
     lists && lists.map((item, index) => (
       <option key={index} name="list">
@@ -66,6 +69,7 @@ function TaskModal({
       </option>
     ))
   }
+   
 </select>
         </div>
         <div>

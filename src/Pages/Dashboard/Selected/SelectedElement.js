@@ -8,13 +8,19 @@ import TaskModal from "./TaskModal";
 import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
 import close from "../media/close.png";
+import { useAuth } from "../../../Context/AuthContext";
+import List from "./List";
 
-function SelectedTask({ currentUser }) {
+function SelectedElement() {
+  const {currentUser } = useAuth();
+
   const [modal, setModal] = useState(null);
   const { email } = currentUser ? currentUser._delegate : {};
   const dispatch = useDispatch();
   const userState = useSelector((state) => state);
   const { selectedElement } = userState.userData;
+  const { collections } = userState.userData.userData;
+
 
   function handleChangeModal(e) {
     if (e.target.name === "title") {
@@ -117,6 +123,7 @@ function SelectedTask({ currentUser }) {
         console.error("Error making PUT request:", error);
       });
   }
+  
 
   return (
     <div className="selected_style_wrapper">
@@ -126,6 +133,9 @@ function SelectedTask({ currentUser }) {
       ) : null}
       {selectedElement === "Calendar" && userState ? <Calendar /> : null}
       {selectedElement === "Sticky Notes" && userState ? <StickyNotes /> : null}
+      {
+        selectedElement.substring(0, 4) === "List" && <List title={selectedElement.substring(4)} props={collections} openModal={openModal} saveUserData={saveUserData}/>
+      }
       {modal && (
         <TaskModal
           saveTask={saveTask}
@@ -143,4 +153,4 @@ function SelectedTask({ currentUser }) {
   );
 }
 
-export default SelectedTask;
+export default SelectedElement;
