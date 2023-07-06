@@ -11,7 +11,7 @@ import SelectedTask from "./Selected/SelectedTask";
 function Dashboard() {
   const { signOut, currentUser } = useAuth();
   const userState = useSelector((state) => state);
-  const {email} = userState.userData.userData && userState.userData.userData.userData
+  // const {email} = userState.userData.userData && userState.userData.userData.userData
   const dispatch = useDispatch();
 
   function updateUserData(data) {
