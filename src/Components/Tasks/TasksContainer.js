@@ -36,7 +36,7 @@ function TasksContainer({ selectedTaskFilter }) {
           setTasks(response.data);
         });
     } catch (error) {}
-  }, [taskFilter, currentUser.email]);
+  }, [taskFilter]);
   if (tasks === null) {
     return <div>loading...</div>;
   }

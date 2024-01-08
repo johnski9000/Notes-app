@@ -5,7 +5,7 @@ function StickyNotes() {
   const StickyNote = () => {
     return (
       <li>
-        <a href="#" contenteditable>
+        <a href="#" contenteditable="true">
           <h2>Title #2</h2>
           <p>Text Content #2</p>
         </a>

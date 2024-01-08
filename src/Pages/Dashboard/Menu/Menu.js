@@ -16,6 +16,7 @@ import submit from "../media/arrow-right.png";
 import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
 import remove from "../media/x-button.png";
+import { apiURLLocal } from "../../../Variables/const";
 
 function Menu({ openModal }) {
   const { signOut, currentUser } = useAuth();
@@ -70,7 +71,7 @@ function Menu({ openModal }) {
   }
   function saveUserData() {
     axios
-      .get("https://notes-server-lac.vercel.app/", {
+      .get(apiURLLocal, {
         params: {
           email: email,
         },

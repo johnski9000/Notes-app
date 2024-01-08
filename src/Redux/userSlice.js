@@ -33,8 +33,33 @@ export const userSlice = createSlice({
       Cookies.remove("modal");
     },
     updateModal: (state, action) => {
-      state.modal = { ...state.modal, ...action.payload };
-      Cookies.set("modal", JSON.stringify(state.modal), { expires: 7 });
+      const { title, value } = action.payload;
+      if (title === "due_date") {
+        const jsDate = new Date(value);
+        const seconds = Math.floor(jsDate.getTime() / 1000);
+        const nanoseconds = (jsDate.getTime() % 1000) * 1e6;
+
+        const firestoreTimestamp = {
+          _seconds: seconds,
+          _nanoseconds: nanoseconds,
+        };
+        state.modal = {
+          ...state.modal,
+          due_date: firestoreTimestamp,
+        };
+        console.log(state.modal.due_date);
+        Cookies.set("modal", JSON.stringify(state.modal), { expires: 7 });
+      } else if (title === "subTasks") {
+        console.log(value);
+        state.modal.subTasks.push(value);
+        Cookies.set("modal", JSON.stringify(state.modal), { expires: 7 });
+      } else {
+        state.modal = { ...state.modal, [title]: value };
+        Cookies.set("modal", JSON.stringify(state.modal), { expires: 7 });
+      }
+    },
+    removeSubTask: (state, action) => {
+      state.modal.subTasks.splice(action.payload, 1);
     },
   },
 });
@@ -45,6 +70,7 @@ export const {
   setModal,
   clearModal,
   updateModal,
+  removeSubTask,
 } = userSlice.actions;
 
 export default userSlice.reducer;

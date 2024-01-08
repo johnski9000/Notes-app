@@ -240,6 +240,15 @@
   bottom: 20px;
   top: 20px;
   right: 1%;
+  animation: 0.5s ease-in-out 0s 1 slideInFromRight;
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .modal_title {
   width: 100%;
