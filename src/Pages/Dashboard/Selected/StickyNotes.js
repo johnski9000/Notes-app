@@ -2,20 +2,9 @@ import React from "react";
 import styles from "../Dashboard.module.css";
 import { useSelector } from "react-redux";
 import CreateNote from "../../../Components/Tasks/CreateNote";
-
+import StickyNote from "./StickyNote";
 function StickyNotes() {
   const { Notes } = useSelector((state) => state.userData.userData.collections);
-  const StickyNote = ({ props }) => {
-    console.log(props);
-    return (
-      <li>
-        <a href="#" contenteditable="true">
-          <h2 className="pb-2 font-bold text-l">{props.title}</h2>
-          <p>{props.body}</p>
-        </a>
-      </li>
-    );
-  };
 
   return (
     <div className="w-full p-10">

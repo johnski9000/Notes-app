@@ -44,7 +44,7 @@ function Menu({ openModal }) {
     dispatch(setSelectedElement(data));
   }
   const TaskItems = [
-    { name: "Home", image: rightImg },
+    { name: "Create a task", image: rightImg },
     { name: "Tasks", image: listImg },
     { name: "Calendar", image: calenderImg },
     { name: "Sticky Notes", image: stickyImg },
