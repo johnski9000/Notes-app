@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   /* border: 1px solid red; */
 }
@@ -5,9 +8,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh
+  height: 100vh;
+  width: 100vw;
 }
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+/* #no-scrollbar::-webkit-scrollbar {
+  display: none;
+} */
+#no-scrollbar::-webkit-scrollbar {
+  width: 5px; /* hide vertical scrollbar */
+}
+
+#no-scrollbar::-webkit-scrollbar-thumb {
+  background-color: grey; /* optional: hide thumb as well */
+}
+
+#no-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* optional: hide track as well */
+}
+
+#no-scrollbar::-webkit-scrollbar-corner {
+  display: none; /* optional: hide scrollbar corner as well */
+}
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap");
 
 .selected_style_wrapper {
   display: flex;
@@ -18,25 +40,22 @@
   /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
   border-radius: 0 25px 25px 0;
   border-left: 1px solid rgb(209, 209, 209);
-  padding: 10px;
   height: 100%;
   border-bottom: 1px solid rgb(211, 211, 211);
   padding-left: 0;
-
 }
 #search {
   outline: unset !important;
   border: unset !important;
 }
 
-
 .itemCount {
   position: absolute;
   right: 0;
   padding: 4px 8px;
-    background: grey;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: grey;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

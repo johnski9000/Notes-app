@@ -6,9 +6,8 @@ import { setUserData } from "../../../Redux/userSlice";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 import { useDispatch } from "react-redux";
-import TaskItem from "./TaskItem";
 
-function Upcoming({openModal, saveUserData}) {
+function Upcoming({ openModal, saveUserData }) {
   const [today, setToday] = useState();
   const [tomorrow, setTomorrow] = useState();
   const [week, setWeek] = useState();
@@ -21,7 +20,6 @@ function Upcoming({openModal, saveUserData}) {
 
   const { email } = currentUser ? currentUser._delegate : {};
   const dispatch = useDispatch();
-
 
   function sendData(inputData) {
     axios
@@ -45,20 +43,18 @@ function Upcoming({openModal, saveUserData}) {
     } else {
       if (e.target.name === "today") {
         const inputData = { email, data: today, taskType: "TasksToday" };
-        setToday("")
+        setToday("");
         const res = await sendData(inputData);
         console.log(res);
-      } 
-      else if (e.target.name === "tomorrow") {
-        console.log("sending")
+      } else if (e.target.name === "tomorrow") {
+        console.log("sending");
         const inputData = { email, data: tomorrow, taskType: "TasksTomorrow" };
-        setTomorrow("")
+        setTomorrow("");
         const res = await sendData(inputData);
         console.log(res);
-      } 
-      else if (e.target.name === "week") {
+      } else if (e.target.name === "week") {
         const inputData = { email, data: week, taskType: "TasksWeek" };
-        setWeek("")
+        setWeek("");
         const res = await sendData(inputData);
         console.log(res);
       }
@@ -87,13 +83,17 @@ function Upcoming({openModal, saveUserData}) {
               <button onClick={(e) => submitTask(e)}>
                 <img src={add} alt="" name="today" />
               </button>
-              <input value={today} onChange={(e) => handleChange(e)} name="today" />
+              <input
+                value={today}
+                onChange={(e) => handleChange(e)}
+                name="today"
+              />
             </div>
             <div className={styles.tasksWrapper}>
-              {TasksToday &&
+              {/* {TasksToday &&
                 TasksToday.map((item, index) => (
                   <TaskItem props={item} key={index}  openModal={openModal} taskType="TasksToday"></TaskItem>
-                ))}
+                ))} */}
             </div>
           </div>
           <div className={styles.upcomingRowTwo}>
@@ -101,36 +101,43 @@ function Upcoming({openModal, saveUserData}) {
               <h3>Tomorrow</h3>
               <div className={styles.addTaskUpcoming}>
                 <button onClick={(e) => submitTask(e)}>
-                  <img src={add} alt="" name="tomorrow"/>
+                  <img src={add} alt="" name="tomorrow" />
                 </button>
-                <input value={tomorrow} onChange={(e) => handleChange(e)} name="tomorrow" />
+                <input
+                  value={tomorrow}
+                  onChange={(e) => handleChange(e)}
+                  name="tomorrow"
+                />
               </div>
               <div className={styles.tasksWrapper}>
-                {TasksTomorrow &&
+                {/* {TasksTomorrow &&
                   TasksTomorrow.map((item, index) => (
                     <TaskItem props={item} key={index}  openModal={openModal}  taskType="TasksTomorrow"></TaskItem>
-                  ))}
+                  ))} */}
               </div>
             </div>
             <div className={styles.upcomingRowTwoChild}>
               <h3>This Week</h3>
               <div className={styles.addTaskUpcoming}>
                 <button onClick={(e) => submitTask(e)}>
-                  <img src={add} alt="" name="week"/>
+                  <img src={add} alt="" name="week" />
                 </button>
-                <input value={week} onChange={(e) => handleChange(e)} name="week" />
+                <input
+                  value={week}
+                  onChange={(e) => handleChange(e)}
+                  name="week"
+                />
               </div>
               <div className={styles.tasksWrapper}>
-                {TasksWeek &&
+                {/* {TasksWeek &&
                   TasksWeek.map((item, index) => (
                     <TaskItem props={item} key={index} openModal={openModal} taskType="TasksWeek"></TaskItem>
-                  ))}
+                  ))} */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

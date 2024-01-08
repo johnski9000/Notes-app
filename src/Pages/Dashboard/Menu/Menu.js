@@ -17,7 +17,7 @@ import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
 import remove from "../media/x-button.png";
 
-function Menu({openModal}) {
+function Menu({ openModal }) {
   const { signOut, currentUser } = useAuth();
   const { email } = currentUser ? currentUser._delegate : {};
   const [searchInput, setSearchInput] = useState();
@@ -39,11 +39,12 @@ function Menu({openModal}) {
   const dispatch = useDispatch();
 
   function handleClick(data) {
+    console.log(data);
     dispatch(setSelectedElement(data));
   }
   const TaskItems = [
-    { name: "Upcoming", image: rightImg },
-    { name: "Today", image: listImg },
+    { name: "Home", image: rightImg },
+    { name: "Tasks", image: listImg },
     { name: "Calendar", image: calenderImg },
     { name: "Sticky Notes", image: stickyImg },
   ];
@@ -128,7 +129,9 @@ function Menu({openModal}) {
       {searchInput ? (
         <div className={styles.searchTab}>
           {searchItem().map((item, index) => (
-            <div key={index} onClick={() => openModal(item)}>{item.title}</div>
+            <div key={index} onClick={() => openModal(item)}>
+              {item.title}
+            </div>
           ))}
         </div>
       ) : (
@@ -150,7 +153,7 @@ function Menu({openModal}) {
           <div className={styles.taskListContainer}>
             <div className={styles.tasksTitle}>Lists</div>
             <ul className={styles.taskList}>
-              <div className={styles.listContainer}>
+              <div className={styles.listContainer} id="no-scrollbar">
                 {Lists &&
                   Lists.map((item, index) => (
                     <div
@@ -186,6 +189,7 @@ function Menu({openModal}) {
                         height: "20px",
                       }}
                     />
+                    <input type="color" />
                     <input
                       type="text"
                       className={styles.addListTitle}

@@ -7,11 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUserData } from "../../Redux/userSlice";
 import axios from "axios";
 import SelectedElement from "./Selected/SelectedElement";
+import TaskModal from "./Selected/TaskModal";
+import { apiURL, apiURLLocal } from "../../Variables/const";
 
 function Dashboard() {
   const { currentUser } = useAuth();
-  const userState = useSelector((state) => state);
-  // const {email} = userState.userData.userData && userState.userData.userData.userData
+  const { userData, selectedElement, modal } = useSelector(
+    (state) => state.userData
+  );
   const dispatch = useDispatch();
 
   function updateUserData(data) {
@@ -23,15 +26,15 @@ function Dashboard() {
   useEffect(() => {
     if (currentUser) {
       axios
-        .get("https://notes-server-lac.vercel.app", {
-            params: {
-                email: currentUser.email
-              }
+        .get(apiURLLocal, {
+          params: {
+            email: currentUser.email,
+          },
         })
         .then(function (response) {
           // handle success
           console.log(response);
-          updateUserData(response.data)
+          updateUserData(response.data);
         })
         .catch(function (error) {
           // handle error
@@ -44,17 +47,17 @@ function Dashboard() {
     if (!currentUser) {
       navigate("/");
     }
-  }, [currentUser]);
-
+  }, [currentUser, navigate]);
+  const displayModal = () => {
+    if (modal) {
+      return <TaskModal />;
+    }
+  };
   return (
-    <div className={styles.dashboardWrapper}>
-      {
-        userState.userData.userData ? <> 
-        <SelectedElement/>
-        </> :
-        <div>loading...</div>
-      }
-
+    <div className="relative h-[90vh] w-[90vw] max-w-[1440px] max-h-[1000px] mx-auto border border-solid border-gray-300 rounded-3xl flex shadow-md overflow-hidden">
+      <Menu />
+      <SelectedElement selectedElement={selectedElement} />
+      {displayModal()}
     </div>
   );
 }

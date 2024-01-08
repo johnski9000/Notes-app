@@ -1,472 +1,540 @@
 .dashboardWrapper {
-    height: 90vh;
-    width: 90vw;
-    max-width: 1440px;
-    max-height: 1000px;
-    margin: 0 auto;
-    border: 1px solid #d2d2d2;
-    border-radius: 23px;
-    display: flex;
-        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-overflow: hidden;
+  height: 90vh;
+  width: 90vw;
+  max-width: 1440px;
+  max-height: 1000px;
+  margin: 0 auto;
+  border: 1px solid #d2d2d2;
+  border-radius: 23px;
+  display: flex;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  overflow: hidden;
 }
 .MenuWrapper {
-    align-self: flex-end;
-    border-bottom: 1px solid rgb(211, 211, 211);
-    padding: 10px;
-    width: 250px;
-    height: 100%;
-    border-radius: 25px 0 0 25px;
-    background-color: #f4f4f4;
-    position: relative;
-    /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
+  align-self: flex-end;
+  border-bottom: 1px solid rgb(211, 211, 211);
+  padding: 10px;
+  width: 300px;
+  height: 100%;
+  border-radius: 25px 0 0 25px;
+  background-color: #f4f4f4;
+  position: relative;
+  /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
 }
 .titleSection {
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
 }
 .menuTitle {
-    font-weight: bold;
-    font-size: 22px;
+  font-weight: bold;
+  font-size: 22px;
 }
 .menuImage img {
-    width: 30px;
-    height: auto;
+  width: 30px;
+  height: auto;
 }
 .searchBar {
-    width: 90%;
-    height: 40px;
-    margin: 0 auto;
-    margin-top: 20px;
-    border-radius: 10px;
-    background-color: #ebebeb;
-    border: 1px solid #cecece;
-    display: flex;
-    align-items: center;
-    padding: 0px 7px;
+  width: 90%;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: #ebebeb;
+  border: 1px solid #cecece;
+  display: flex;
+  align-items: center;
+  padding: 0px 7px;
 }
 
 .searchImg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .searchImg img {
-    width: 24px;
-    height: auto;
+  width: 24px;
+  height: auto;
 }
 .searchInputWrapper {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 .searchInputWrapper input {
-    width: 95%;
-    outline: unset;
-    border: unset;
-    background: unset;
-    height: 100%;
-    margin: 0 auto;
+  width: 95%;
+  outline: unset;
+  border: unset;
+  background: unset;
+  height: 100%;
+  margin: 0 auto;
 }
 .taskTab {
-    width: 80%;
-    margin: 0 auto;
-    max-height: 100px;
-    height: 100%;
-    overflow-y: scroll;
-    margin-top: 15px;
-    padding: 10px;
-    padding-top: 0px;
+  width: 80%;
+  margin: 0 auto;
+  max-height: 100px;
+  height: 100%;
+  overflow-y: scroll;
+  margin-top: 15px;
+  padding: 10px;
+  padding-top: 0px;
 }
 .taskListContainer {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 .tasksTitle {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 13px;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 
 .taskList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 .taskList li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    transition: .5s;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 0.5s;
 }
 .taskList li:hover {
-    margin-left: 20px;
-    transition: .5s;
+  margin-left: 20px;
+  transition: 0.5s;
 }
 .taskList li img {
-    width: 15px;
-    margin-right: 10px;
-    height: auto;
+  width: 15px;
+  margin-right: 10px;
+  height: auto;
 }
 .taskList li:nth-child(1) img {
-    width: 20px;
-    transform: translateX(-2px);
-    margin-right: 5px;
-    height: auto;
+  width: 20px;
+  transform: translateX(-2px);
+  margin-right: 5px;
+  height: auto;
 }
 .todayTitle {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .addTask,
 .addTaskUpcoming {
-    padding: 8px 15px 8px 0px;
-    flex: 1;
-    min-height: 20px;
-    max-height: 20px;
-    display: flex;
-    border: 1px solid rgb(229, 229, 229);
-    margin-left: 25px;
-    border-radius: 5px;
-    margin-right: 20px;
-  }
-  .addTaskModal {
-    padding: 8px 15px 8px 0px;
-    flex: 1;
-    min-height: 20px;
-    max-height: 20px;
-    display: flex;
-    border: 1px solid rgb(229, 229, 229);
-    border-radius: 5px;
-  }
-  .addTaskModal button {
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: unset;
-    border: unset;
-  }
-  .addTaskModal button img{
-    width: 15px;
-    height: auto;
-  }
-  .addTaskModal input {
-    border: unset;
-    background: unset;
-    width: 100%;
-  }
-  .addTaskUpcoming {
-    margin: unset;
-  }
-  .addTask button,
-  .addTaskUpcoming button {
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: unset;
-    border: unset;
-  }
-  .addTask button img,
-  .addTaskUpcoming button img{
-    width: 15px;
-    height: auto;
-  }
-  .addTask input,
-  .addTaskUpcoming input {
-    flex: 1;
-    border: unset;
-    outline: unset;
-  }
+  flex: 1;
+  max-height: 50px;
+  display: flex;
+  border: 1px solid rgb(229, 229, 229);
+  border-radius: 5px;
+  margin-right: 20px;
+  position: relative;
+  margin-top: 50px;
+}
+.addTask input {
+  padding-left: 15px;
+}
+
+.addTask input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.addTaskModal {
+  flex: 1;
+  max-height: 50px;
+  display: flex;
+  border: 1px solid rgb(229, 229, 229);
+  border-radius: 5px;
+  position: relative;
+}
+.addTaskModal button {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: unset;
+  border: unset;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.addTaskModal button img {
+  width: 15px;
+  height: auto;
+}
+.addTaskModal input {
+  border: unset;
+  background: unset;
+  width: calc(100% - 50px);
+  height: 30px;
+}
+.addTaskUpcoming {
+  margin: unset;
+}
+.addTask button,
+.addTaskUpcoming button {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: unset;
+  border: unset;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.addTask button img,
+.addTaskUpcoming button img {
+  width: 15px;
+  height: auto;
+}
+.addTask input,
+.addTaskUpcoming input {
+  flex: 1;
+  border: unset;
+  outline: unset;
+}
+.todayParentWrapper {
+  flex: 1;
+  display: flex;
+  overflow-y: scroll;
+  height: 100%;
+}
+.todayWrapper {
+  flex: 1;
+  height: 98%;
+  display: flex;
+  flex-flow: column;
+  position: relative;
+}
+@media screen and (max-width: 1000px) {
   .todayParentWrapper {
-    flex: 1;
-    display: flex;
-    overflow-y: scroll;
-    height: 100%;
-}
-  .todayWrapper {
-    flex: 1;
-    height: 98%;
-    display: flex;
     flex-flow: column;
-    position: relative;
   }
-  @media screen and (max-width: 1000px) {
-    .todayParentWrapper {
-        flex-flow: column;
-    }
-    .taskData {
-        max-height: 80%;
-        overflow: scroll;
-    }
-}
-  .today_task_modal {
-    width: 250px;
-    display: flex;
-    flex-flow: column;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: #f4f4f4;
-    border: 1px solid #bebaba;
-    position: absolute;
+  .taskData {
+    max-height: 80%;
     overflow: scroll;
-    height: 88%;
-    top: 1.5%;
-    right: 1%;
+  }
+}
+.today_task_modal {
+  min-width: 250px;
+  display: flex;
+  flex-flow: column;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #bebaba;
+  position: absolute;
+  overflow: scroll;
+  bottom: 20px;
+  top: 20px;
+  right: 1%;
 }
 .modal_title {
-    width: 100%;
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
+  width: 100%;
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
 }
 .taskData {
-    flex: 1;
-    display: flex;
-    flex-flow: column;
+  flex: 1;
+  display: flex;
+  flex-flow: column;
 }
 .modal_title img {
-    position: absolute;
-    width: 20px;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+  position: absolute;
+  width: 20px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 .modal_buttons {
-    position: sticky;
-    width: 100%;
-    display: flex;
-    left: 0;
-    bottom: 30px;
-    justify-content: center;
+  position: sticky;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  left: 0;
+  bottom: 30px;
+  justify-content: center;
 }
 .modal_buttons button {
-    width: 40%;
-    font-weight: bold;
-    padding: 4px 0;
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 5px;
+  flex: 1;
+  font-weight: bold;
+  padding: 4px 0;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  height: 40px;
 }
-.modal_buttons button:nth-child(1) {
-    margin-right: 10px;
-}
-.modal_buttons button:nth-child(2) {
-    background-color: rgb(255, 212, 59);
-}
-  .listWrapper {
-    padding: 20px;
-flex: 1;
-overflow-y: scroll;
-display: flex;
-flex-flow: column;
-  }
 
-  .todayListItem {
-    padding: 10px 20px;
-border-bottom: 1px solid #d5d1d1;
-flex: 1;
-font-size: 15px;
-position: relative;
-cursor: pointer;
-min-height: 25px;
-max-height: 25px;
-  }
-  .todayListItem div:hover {
-    transform: translateX(10px);
-    transition: 1s;
-  }
-  .todayListItem div {
-  transition: 1s;
-  }
-  .todayListItem img {
-    position: absolute;
-    width: 35px;
-    right: 0;
-    top: 5px;
-  }
- 
-.taskTitle {
-    display: flex;
+.modal_buttons button:nth-child(2) {
+  background-color: rgb(255, 212, 59);
 }
-.taskTitle input{
-margin-top: 20px;
-flex: 1;
-background-color: unset;
-border: 1px solid rgb(203, 203, 203);
-color: rgb(84, 84, 84);
-padding: 8px 0px 8px 10px;
-border-radius: 7px;
+.listWrapper {
+  flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  gap: 20px;
+  flex-flow: column;
+}
+
+.todayListItem {
+  border-bottom: 1px solid #d5d1d1;
+  flex: 1;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+  max-height: 50px;
+  display: flex;
+  align-items: center;
+}
+.todayListItem div:hover {
+  transform: translateX(10px);
+  transition: 1s;
+}
+.todayListItem div {
+  transition: 1s;
+}
+.todayListItem img {
+  position: absolute;
+  width: 35px;
+  right: 0;
+  top: 5px;
+}
+
+.taskTitle {
+  display: flex;
+}
+.taskTitle input {
+  margin-top: 20px;
+  flex: 1;
+  background-color: unset;
+  border: 1px solid rgb(203, 203, 203);
+  color: rgb(84, 84, 84);
+  padding: 8px 0px 8px 10px;
+  border-radius: 7px;
 }
 .description {
-    display: flex;
+  display: flex;
 }
 .description textarea {
-    margin-top: 20px;
-flex: 1;
-background-color: unset;
-border: 1px solid rgb(203, 203, 203);
-color: rgb(84, 84, 84);
-padding: 8px 0px 8px 10px;
-border-radius: 7px;
-height: 75px;
+  margin-top: 20px;
+  flex: 1;
+  background-color: unset;
+  border: 1px solid rgb(203, 203, 203);
+  color: rgb(84, 84, 84);
+  padding: 8px 0px 8px 10px;
+  border-radius: 7px;
+  height: 75px;
 }
 .date {
-    margin-top: 40px;
-    border: unset;
-color: rgb(84, 84, 84);
-width: fit-content;
-background: #f4f4f4;
+  margin-top: 40px;
+  border: unset;
+  color: rgb(84, 84, 84);
+  width: fit-content;
+  background: #f4f4f4;
 }
 .date input {
-    margin-left: 10px;
-    border: unset;
-color: rgb(84, 84, 84);
-width: fit-content;
-background: #f4f4f4;
-border: 1px solid rgb(203, 203, 203);
-padding: 4px;
-    border-radius: 10px;
+  margin-left: 10px;
+  border: unset;
+  color: rgb(84, 84, 84);
+  width: fit-content;
+  background: #f4f4f4;
+  border: 1px solid rgb(203, 203, 203);
+  padding: 4px;
+  border-radius: 10px;
 }
 .tags {
-    margin-top: 40px; 
-    margin-bottom: 20px;
-    border: unset;
-color: rgb(84, 84, 84);
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border: unset;
+  color: rgb(84, 84, 84);
 }
 .logout {
-    width: 100px;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 45px;
-    left: 35px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 45px;
+  left: 35px;
 }
 .logout img {
-    width: 20px;
-    margin-right: 5px;
+  width: 20px;
+  margin-right: 5px;
 }
 .searchTab {
-    padding: 15px;
+  padding: 15px;
 }
 .upcomingWrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-flow: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
 }
 .upcomingRowOne {
-    padding: 0 25px;
-flex: .8;
-border: 1px solid #d2d2d2;
-border-radius: 21px;
-margin-bottom: 10px;
-overflow: hidden;
-display: flex;
-flex-flow: column;
+  padding: 0 25px;
+  flex: 0.8;
+  border: 1px solid #d2d2d2;
+  border-radius: 21px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
 }
 .upcomingRowTwo {
-flex: 1;
-display: flex;
-gap: 10px;
+  flex: 1;
+  display: flex;
+  gap: 10px;
 }
 .upcomingRowTwoChild {
-    flex: 1;
-    padding: 0 25px;
-    border: 1px solid #d2d2d2;
-    height: 90%;
-    border-radius: 21px;
-    overflow: hidden;
-    display: flex;
-    flex-flow: column;
+  flex: 1;
+  padding: 0 25px;
+  border: 1px solid #d2d2d2;
+  height: 90%;
+  border-radius: 21px;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
 }
 .subTaskWrapper {
-    height: 200px;
-    overflow: scroll;
-    padding: 15px;
-    margin-top: 20px;
-    display: flex;
-    flex-flow: column;
-    gap: 20px;
+  height: 200px;
+  overflow: scroll;
+  padding: 15px;
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
 }
 .subTaskItem {
-    margin-bottom: 3px;
-    display: flex;
-    align-items: center;
-    
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
 }
 .subTaskItem img {
-    width: 25px;
-    margin-right: 20px;
+  width: 25px;
+  margin-right: 20px;
 }
 .tasksWrapper {
-    display: flex;
-    flex-flow: column;
-    gap: 15px;
-    padding: 10px;
-    overflow: scroll;
-
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  padding: 10px;
+  overflow: scroll;
 }
 
 .addList {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .addListTitle {
-    width: 100%;
-    border: unset;
-    outline: unset;
-    background-color: unset;
+  width: 100%;
+  border: unset;
+  outline: unset;
+  background-color: unset;
 }
 .addListButton {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .addListButton img {
-    width: 20px;
-    margin-right: 15px;
+  width: 20px;
+  margin-right: 15px;
 }
 .addListContainer {
-    margin-top: 20px;
-    height: auto;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 20px;
-    padding: 20px;
+  margin-top: 20px;
+  height: auto;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 20px;
+  padding: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden !important;
 }
 .colorContainer {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    gap: 6px;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  gap: 6px;
 }
 
 .addList img {
-    width: 25px;
-    height: auto;
+  width: 25px;
+  height: auto;
 }
 .listItem {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 .listItemColor {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 .listContainer {
-    max-height: 100px;
-    overflow: scroll;
+  max-height: 100px;
+  overflow: scroll;
+}
+
+/* sticky list css */
+.stickyList,
+li {
+  list-style: none;
+}
+.stickyList {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 40px;
+}
+.stickyList li a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  transform: rotate(-6deg);
+  transition: transform 0.15s linear;
+}
+
+.stickyList li:nth-child(even) a {
+  transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+  background: #cfc;
+}
+.stickyList li:nth-child(3n) a {
+  transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+  background: #ccf;
+}
+.stickyList li:nth-child(5n) a {
+  transform: rotate(5deg);
+  position: relative;
+  top: -10px;
+}
+
+.stickyList li a:hover,
+ul li a:focus {
+  box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.7);
+  transform: scale(1.25);
+  position: relative;
+  z-index: 5;
+}
+
+.stickyList li {
+  margin: 1em;
 }

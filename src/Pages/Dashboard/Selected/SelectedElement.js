@@ -1,159 +1,26 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Calendar from "./Calendar";
+import styles from "../Dashboard.module.css";
+import Tasks from "./Tasks";
 import Upcoming from "./Upcoming";
+import Calendar from "./Calendar";
 import StickyNotes from "./StickyNotes";
-import Today from "./Today";
-import TaskModal from "./TaskModal";
-import axios from "axios";
-import { setUserData } from "../../../Redux/userSlice";
-import close from "../media/close.png";
-import { useAuth } from "../../../Context/AuthContext";
-import List from "./List";
-import Menu from "../Menu/Menu";
 
-function SelectedElement() {
-  const {currentUser } = useAuth();
-
-  const [modal, setModal] = useState(null);
-  const { email } = currentUser ? currentUser._delegate : {};
-  const dispatch = useDispatch();
-  const userState = useSelector((state) => state);
-  const { selectedElement } = userState.userData;
-  const { collections } = userState.userData.userData;
-
-
-  function handleChangeModal(e) {
-    if (e.target.name === "title") {
-      setModal((prevModal) => ({
-        ...prevModal,
-        title: e.target.value,
-      }));
-    } else if (e.target.name === "description") {
-      setModal((prevModal) => ({
-        ...prevModal,
-        description: e.target.value,
-      }));
-    } else if (e.target.name === "date") {
-      setModal((prevModal) => ({
-        ...prevModal,
-        dueDate: e.target.value,
-      }));
-      console.log(modal);
-    } else if (e.target.name === "lists") {
-      setModal((prevModal) => ({
-        ...prevModal,
-        list: e.target.value,
-      }));
+function SelectedElement({ selectedElement }) {
+  const renderElement = () => {
+    switch (selectedElement) {
+      case "Today":
+        return <Tasks />;
+      case "Upcoming":
+        return <Upcoming />;
+      case "Calendar":
+        return <Calendar />;
+      case "Sticky Notes":
+        return <StickyNotes />;
+      default:
+        return <Tasks />;
     }
-  }
-  function saveUserData() {
-    axios
-      .get("https://notes-server-lac.vercel.app/", {
-        params: {
-          email: email,
-        },
-      })
-      .then(function (response) {
-        // handle success
-        console.log(response);
-
-        dispatch(setUserData(response.data));
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }
-  function submitSubTask(subTask) {
-    if (modal.subTasks) {
-      setModal((prevModal) => ({
-        ...prevModal,
-        subTasks: [...modal.subTasks, subTask],
-      }));
-    } else {
-      setModal((prevModal) => ({
-        ...prevModal,
-        subTasks: [subTask],
-      }));
-    }
-  }
-  function deleteSubTask(index) {
-    setModal((prevModal) => {
-      const updatedSubTasks = [...prevModal.subTasks];
-      updatedSubTasks.splice(index, 1);
-
-      return {
-        ...prevModal,
-        subTasks: updatedSubTasks,
-      };
-    });
-  }
-  function openModal(data) {
-    setModal(null);
-    setModal(data);
-    console.log(data)
-  }
-  function saveTask(e) {
-    e.preventDefault();
-    axios
-      .put(
-        // "http://localhost:8000/updateTask",
-
-        "https://notes-server-lac.vercel.app/updateTask",
-        { ...modal, email }
-      )
-      .then((response) => {
-        console.log("PUT request successful:", response);
-        saveUserData();
-      })
-      .catch((error) => {
-        console.error("Error making PUT request:", error);
-      });
-  }
-  function deleteTask(e) {
-    e.preventDefault();
-    const inputData = { email, data: modal.id };
-    axios
-      .put("https://notes-server-lac.vercel.app/deleteTask", inputData)
-      .then((response) => {
-        console.log("PUT request successful:", response);
-        saveUserData(response.data);
-        setModal(null);
-      })
-      .catch((error) => {
-        console.error("Error making PUT request:", error);
-      });
-  }
-  
-
-  return (
-    <div className="selected_style_wrapper">
-      <Menu openModal={openModal} saveUserData={saveUserData}/>
-      {selectedElement === "Upcoming" && userState ? <Upcoming openModal={openModal} saveUserData={saveUserData}/> : null}
-      {selectedElement === "Today" && userState ? (
-        <Today openModal={openModal} saveUserData={saveUserData} />
-      ) : null}
-      {selectedElement === "Calendar" && userState ? <Calendar /> : null}
-      {selectedElement === "Sticky Notes" && userState ? <StickyNotes /> : null}
-      {
-        selectedElement.substring(0, 4) === "List" && <List title={selectedElement.substring(4)} props={collections} openModal={openModal} saveUserData={saveUserData}/>
-      }
-      {modal && (
-        <TaskModal
-          saveTask={saveTask}
-          handleChangeModal={handleChangeModal}
-          setModal={setModal}
-          image={close}
-          deleteTask={deleteTask}
-          props={modal}
-          submitSubTask={submitSubTask}
-          deleteSubTask={deleteSubTask}
-          lists={userState.userData.userData.collections.Lists}
-        ></TaskModal>
-      )}
-    </div>
-  );
+  };
+  return <div className="selected_style_wrapper">{renderElement()}</div>;
 }
 
 export default SelectedElement;
