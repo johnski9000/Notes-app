@@ -27,6 +27,7 @@ function Menu() {
     color: "black",
     title: "",
   });
+  const [menuOpen, setMenuOpen] = useState(false);
   const userState = useSelector((state) => state);
   const collections = userState.userData.userData
     ? userState.userData.userData.collections
@@ -96,134 +97,148 @@ function Menu() {
       });
   }
 
-  return (
-    <div className={styles.MenuWrapper}>
-      <div className={styles.titleSection}>
-        <div className={styles.menuTitle}>Menu</div>
-        <div className={styles.menuImage}>
-          <img src={menu} alt="menu" />
+  if (menuOpen) {
+    return (
+      <div className={styles.MenuWrapper}>
+        <div className={styles.titleSection}>
+          <div className={styles.menuTitle}>Menu</div>
+          <div
+            className={styles.menuImage}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <img src={menu} alt="menu" />
+          </div>
         </div>
-      </div>
-      <div className={styles.searchBar}>
-        <label htmlFor="search" className={styles.searchImg}>
-          <img src={search} alt="search" />
-        </label>
-        <div className={styles.searchInputWrapper}>
-          <input
-            type="text"
-            id="search"
-            value={searchInput}
-            onChange={(e) => handleChangeSearch(e)}
-          />
+        <div className={styles.searchBar}>
+          <label htmlFor="search" className={styles.searchImg}>
+            <img src={search} alt="search" />
+          </label>
+          <div className={styles.searchInputWrapper}>
+            <input
+              type="text"
+              id="search"
+              value={searchInput}
+              onChange={(e) => handleChangeSearch(e)}
+            />
+          </div>
+          {searchInput && (
+            <img
+              src={clear}
+              alt="clear"
+              className="absolute w-3 h-3 right-[10px] hover:cursor-pointer"
+              onClick={() => setSearchInput("")}
+            />
+          )}
         </div>
-        {searchInput && (
-          <img
-            src={clear}
-            alt="clear"
-            className="absolute w-3 h-3 right-[10px] hover:cursor-pointer"
-            onClick={() => setSearchInput("")}
-          />
-        )}
-      </div>
-      {searchInput ? (
-        <div className="p-[17px] flex flex-col gap-[15px]">
-          {searchItem().map((item, index) => (
-            <div
-              key={index}
-              onClick={() => dispatch(setModal(item))}
-              className="rounded-xl bg-[#e7e7e7] justify-center items-center p-[7px] shadow-xl hover:cursor-pointer transform hover:scale-105 transition-transform duration-300"
-            >
-              {/* <span className="font-bold inline-flex justify-start items-start">
+        {searchInput ? (
+          <div className="p-[17px] flex flex-col gap-[15px]">
+            {searchItem().map((item, index) => (
+              <div
+                key={index}
+                onClick={() => dispatch(setModal(item))}
+                className="rounded-xl bg-[#e7e7e7] justify-center items-center p-[7px] shadow-xl hover:cursor-pointer transform hover:scale-105 transition-transform duration-300"
+              >
+                {/* <span className="font-bold inline-flex justify-start items-start">
                 Title -
               </span>
               &nbsp; */}
-              {item.title}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>
-          <div className={styles.taskListContainer}>
-            {/* <div className={styles.tasksTitle}>Tasks</div> */}
-            <ul className={styles.taskList}>
-              {TaskItems.map((item, index) => (
-                <div key={index}>
-                  <MenuItem
-                    props={item}
-                    state={userState}
-                    handleClick={handleClick}
-                  ></MenuItem>
-                </div>
-              ))}
-            </ul>
+                {item.title}
+              </div>
+            ))}
           </div>
-          <div className={styles.taskListContainer}>
-            <div className={styles.tasksTitle}>Lists</div>
-            <ul className={styles.taskList}>
-              <div className={styles.listContainer} id="no-scrollbar">
-                {Lists &&
-                  Lists.map((item, index) => (
-                    <div
-                      key={index}
-                      className={styles.listItem}
-                      onClick={() => handleClick("List" + item.title)}
-                    >
-                      <div
-                        className={styles.listItemColor}
-                        style={{
-                          backgroundColor: item.color,
-                        }}
-                      ></div>
-                      <div className={styles.listItemTitle}>{item.title}</div>
-                    </div>
-                  ))}
-              </div>
-
-              <div
-                className={styles.addListButton}
-                onClick={() => setAddlist(!addList)}
-              >
-                <img src={add} alt="add list" />
-                Add List
-              </div>
-              {addList && (
-                <div className={styles.addListContainer}>
-                  <div className={styles.addList}>
-                    <input
-                      type="color"
-                      className="w-10"
-                      value={list.color}
-                      onChange={(e) =>
-                        setList({ ...list, color: e.target.value })
-                      }
-                    />
-                    <input
-                      type="text"
-                      className={styles.addListTitle}
-                      value={list.title}
-                      placeholder="Insert Title"
-                      onChange={(e) =>
-                        setList({ ...list, title: e.target.value })
-                      }
-                    />
-                    <img
-                      src={submit}
-                      alt="submit list"
-                      onClick={(e) => submitList(e)}
-                    />
+        ) : (
+          <div>
+            <div className={styles.taskListContainer}>
+              {/* <div className={styles.tasksTitle}>Tasks</div> */}
+              <ul className={styles.taskList}>
+                {TaskItems.map((item, index) => (
+                  <div key={index}>
+                    <MenuItem
+                      props={item}
+                      state={userState}
+                      handleClick={handleClick}
+                    ></MenuItem>
                   </div>
+                ))}
+              </ul>
+            </div>
+            <div className={styles.taskListContainer}>
+              <div className={styles.tasksTitle}>Lists</div>
+              <ul className={styles.taskList}>
+                <div className={styles.listContainer} id="no-scrollbar">
+                  {Lists &&
+                    Lists.map((item, index) => (
+                      <div
+                        key={index}
+                        className={styles.listItem}
+                        onClick={() => handleClick("List" + item.title)}
+                      >
+                        <div
+                          className={styles.listItemColor}
+                          style={{
+                            backgroundColor: item.color,
+                          }}
+                        ></div>
+                        <div className={styles.listItemTitle}>{item.title}</div>
+                      </div>
+                    ))}
                 </div>
-              )}
-            </ul>
+
+                <div
+                  className={styles.addListButton}
+                  onClick={() => setAddlist(!addList)}
+                >
+                  <img src={add} alt="add list" />
+                  Add List
+                </div>
+                {addList && (
+                  <div className={styles.addListContainer}>
+                    <div className={styles.addList}>
+                      <input
+                        type="color"
+                        className="w-10"
+                        value={list.color}
+                        onChange={(e) =>
+                          setList({ ...list, color: e.target.value })
+                        }
+                      />
+                      <input
+                        type="text"
+                        className={styles.addListTitle}
+                        value={list.title}
+                        placeholder="Insert Title"
+                        onChange={(e) =>
+                          setList({ ...list, title: e.target.value })
+                        }
+                      />
+                      <img
+                        src={submit}
+                        alt="submit list"
+                        onClick={(e) => submitList(e)}
+                      />
+                    </div>
+                  </div>
+                )}
+              </ul>
+            </div>
           </div>
+        )}
+        <div onClick={signOut} className={styles.logout}>
+          <img src={logout} alt="logout" />
+          Sign Out
         </div>
-      )}
-      <div onClick={signOut} className={styles.logout}>
-        <img src={logout} alt="logout" />
-        Sign Out
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="absolute w-[50px] h-[50px] z-10 top-2 left-2 flex justify-center items-center bg-white rounded-full shadow-xl border-[1px] border-gray-300 hover:scale-110 transition-all cursor-pointer"
+      >
+        <img src={menu} alt="menu" className="w-6 h-6" />
+      </div>
+    );
+  }
 }
 
 export default Menu;

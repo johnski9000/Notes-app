@@ -54,7 +54,7 @@ function Dashboard() {
     }
   };
   return (
-    <div className="relative h-[90vh] w-[90vw] max-w-[1440px] max-h-[1000px] mx-auto border border-solid border-gray-300 rounded-3xl flex shadow-md overflow-hidden">
+    <div className="relative w-[98%] h-[98%] relative sm:h-[90vh] sm:w-[90vw] max-w-[1440px] max-h-[1000px] mx-auto border border-solid border-gray-300 rounded-3xl flex shadow-md overflow-hidden">
       <Menu />
       <SelectedElement selectedElement={selectedElement} />
       {displayModal()}

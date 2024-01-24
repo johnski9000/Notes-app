@@ -9,7 +9,7 @@ function StickyNotes() {
   const Notes = state.userData ? state.userData.collections.Notes : [];
   console.log("Notes", Notes);
   return (
-    <div className="w-full p-10">
+    <div className="w-full p-10 overflow-y-scroll">
       <h1 className="text-2xl font-bold">Sticky Notes</h1>
       <ul className={styles.stickyList}>
         <CreateNote />
