@@ -16,8 +16,8 @@ function Dashboard() {
     (state) => state.userData
   );
   const dispatch = useDispatch();
-
   function updateUserData(data) {
+    console.log("data", data);
     dispatch(setUserData(data));
   }
 
@@ -50,7 +50,7 @@ function Dashboard() {
   }, [currentUser, navigate]);
   const displayModal = () => {
     if (modal) {
-      return <TaskModal />;
+      return <TaskModal props={modal} />;
     }
   };
   return (

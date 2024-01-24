@@ -3,19 +3,22 @@ import add from "../../Pages/Dashboard/media/addblue.png";
 import { apiURLLocal } from "../../Variables/const";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
+import { useDispatch } from "react-redux";
+import { addNote } from "../../Redux/userSlice";
 
 function CreateNote() {
   const auth = useAuth();
-  console.log(auth.currentUser.email);
+  const dispatch = useDispatch();
   const CreateNoteFunction = () => {
-    console.log("Create Note");
     try {
       axios
         .put(apiURLLocal + "/notes/create", { email: auth.currentUser.email })
         .then((res) => {
-          console.log(res);
-          window.location.reload();
+          const { note } = res.data;
+          console.log(note);
+          dispatch(addNote(note));
         });
+      // dispatch(addNote());
     } catch (error) {
       console.log(error);
     }

@@ -5,6 +5,7 @@ function TasksMenu({ selected, setSelected }) {
     { name: "Due Today", id: 0 },
     { name: "Upcoming", id: 1 },
     { name: "Overdue", id: 2 },
+    { name: "Completed", id: 3 },
   ];
 
   const underlineRef = createRef();
@@ -36,7 +37,7 @@ function TasksMenu({ selected, setSelected }) {
         <div className="absolute bottom-0 right-0 left-0 bg-gray-200 h-1">
           <div
             ref={underlineRef}
-            className={` w-1/3 h-1 bg-gray-600 transition-all`}
+            className={` w-1/4 h-1 bg-gray-600 transition-all`}
           />
         </div>
       </div>

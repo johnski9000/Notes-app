@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import TaskItem from "./TaskItem";
 import axios from "axios";
 import { apiURLLocal } from "../../Variables/const";
 import { useAuth } from "../../Context/AuthContext";
 import AddTask from "./AddTask";
+import TasksDisplayContainer from "./TasksDisplayContainer";
 
 function TasksContainer({ selectedTaskFilter }) {
   const [tasks, setTasks] = useState(null);
@@ -17,7 +17,8 @@ function TasksContainer({ selectedTaskFilter }) {
         return "Upcoming";
       case 2:
         return "Overdue";
-      // Add more cases as needed
+      case 3:
+        return "Completed";
       default:
         return "Due Today";
     }
@@ -27,16 +28,14 @@ function TasksContainer({ selectedTaskFilter }) {
       axios
         .get(`${apiURLLocal}/tasks`, {
           params: {
-            taskFilter: taskFilter,
             email: currentUser.email,
           },
         })
         .then((response) => {
-          console.log(response.data);
           setTasks(response.data);
         });
     } catch (error) {}
-  }, [taskFilter]);
+  }, []);
   if (tasks === null) {
     return <div>loading...</div>;
   }
@@ -45,9 +44,7 @@ function TasksContainer({ selectedTaskFilter }) {
     <div>
       <AddTask />
       <div className="flex flex-col gap-4">
-        {tasks.map((task) => {
-          return <TaskItem task={task} />;
-        })}
+        <TasksDisplayContainer tasks={tasks} filter={taskFilter} />
       </div>
     </div>
   );

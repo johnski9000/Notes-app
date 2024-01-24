@@ -1,37 +1,49 @@
 import React, { useRef, useState } from "react";
-import image from "../media/deletered.png";
-import check from "../media/check.png";
-import axios from "axios";
-import { apiURL, apiURLLocal } from "../../../Variables/const";
-import { useAuth } from "../../../Context/AuthContext";
+import image from "./deleted.png";
+import check from "./check.png";
+import { useAuth } from "../../Context/AuthContext";
+import { useDispatch } from "react-redux";
+import { useDeleteNote, useUpdateNote } from "./functions";
 
 function StickyNote({ props }) {
   const [selected, setSelected] = useState(false);
   const auth = useAuth();
   const contentEditableRef = useRef(null);
-  const deleteNote = () => {
-    console.log("Delete Note");
-    axios
-      .put(apiURLLocal + "/notes/delete", {
-        email: auth.currentUser.email,
+  const dispatch = useDispatch();
+  const DeleteNote = () => {
+    try {
+      useDeleteNote({
         id: props.id,
+        email: auth.currentUser.email,
+        dispatch: dispatch,
       })
+        .then((res) => {
+          console.log(res);
+          // Handle the response here if needed
+        })
+        .catch((error) => {
+          console.log(error);
+          // Handle the error here if needed
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const UpdateNote = () => {
+    const data = {
+      title: contentEditableRef.current.children[2].innerText,
+      body: contentEditableRef.current.children[3].innerText,
+    };
+    const id = props.id;
+    const email = auth.currentUser.email;
+    useUpdateNote((props = { id, email, data }))
       .then((res) => {
         console.log(res);
-        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
       });
-  };
-  const updateNote = () => {
-    console.log("Update Note");
-    console.log(contentEditableRef.current.children[2].innerText);
-    axios.put(apiURLLocal + "/notes/update", {
-      email: auth.currentUser.email,
-      id: props.id,
-      data: {
-        title: contentEditableRef.current.children[2].innerText,
-        body: contentEditableRef.current.children[3].innerText,
-      },
-    });
   };
 
   const handleContentChange = () => {
@@ -59,7 +71,7 @@ function StickyNote({ props }) {
           alt="Delete"
           className="w-8 h-8 absolute right-[5px] top-[10px] hover:cursor-pointer "
           onClick={() => {
-            deleteNote();
+            DeleteNote();
           }}
         />
         {selected && (
@@ -68,7 +80,7 @@ function StickyNote({ props }) {
             alt="Update"
             className="w-8 h-8 absolute right-[5px] bottom-[10px] hover:cursor-pointer "
             onClick={() => {
-              updateNote();
+              UpdateNote();
             }}
           />
         )}

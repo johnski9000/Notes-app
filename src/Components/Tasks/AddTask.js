@@ -4,11 +4,13 @@ import axios from "axios";
 import { apiURLLocal } from "../../Variables/const";
 import { useAuth } from "../../Context/AuthContext";
 import { Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addATask } from "../../Redux/userSlice";
 
 function AddTask() {
   const [task, setTask] = useState("");
   const auth = useAuth();
-
+  const dispatch = useDispatch();
   const addTask = () => {
     console.log("test");
     axios
@@ -19,7 +21,7 @@ function AddTask() {
       .then((res) => {
         console.log(res);
         setTask("");
-        window.location.reload();
+        dispatch(addATask(res.data));
       });
   };
   return (

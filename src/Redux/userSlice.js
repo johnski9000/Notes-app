@@ -6,10 +6,19 @@ export const userSlice = createSlice({
   initialState: {
     userData: Cookies.get("userData")
       ? JSON.parse(Cookies.get("userData"))
-      : null,
+      : {
+          collections: {
+            Lists: [],
+            Notes: [],
+            Tasks: [],
+          },
+          userData: {
+            email: "",
+          },
+        },
     selectedElement: Cookies.get("selectedElement")
       ? JSON.parse(Cookies.get("selectedElement"))
-      : null,
+      : "Tasks",
     modal: Cookies.get("modal") ? JSON.parse(Cookies.get("modal")) : null,
   },
   reducers: {
@@ -25,6 +34,7 @@ export const userSlice = createSlice({
       });
     },
     setModal: (state, action) => {
+      console.log("payload", action.payload);
       state.modal = action.payload;
       Cookies.set("modal", JSON.stringify(action.payload), { expires: 7 });
     },
@@ -61,6 +71,76 @@ export const userSlice = createSlice({
     removeSubTask: (state, action) => {
       state.modal.subTasks.splice(action.payload, 1);
     },
+    addNote: (state, action) => {
+      console.log(action.payload);
+      state.userData.collections.Notes.push(action.payload);
+      Cookies.set("userData", JSON.stringify(state.userData), { expires: 7 });
+    },
+    removeNote: (state, action) => {
+      console.log(action.payload);
+      const notesArray = state.userData.collections.Notes;
+      const index = notesArray.findIndex((item) => item.id === action.payload);
+
+      if (index !== -1) {
+        notesArray.splice(index, 1);
+
+        if (notesArray.length === 0) {
+          state.userData.collections.Notes = [];
+        }
+
+        Cookies.set("userData", JSON.stringify(state.userData), { expires: 7 });
+      }
+    },
+    setTaskComplete: (state, action) => {
+      const taskArray = state.userData.collections.Tasks.slice(); // Create a shallow copy
+      const index = taskArray.findIndex((item) => item.id === action.payload);
+
+      if (index !== -1) {
+        const updatedTask = {
+          ...taskArray[index],
+          completed: true,
+        };
+
+        taskArray[index] = updatedTask;
+
+        // Create a new state object to ensure immutability
+        const newState = {
+          ...state,
+          userData: {
+            ...state.userData,
+            collections: {
+              ...state.userData.collections,
+              Tasks: taskArray,
+            },
+          },
+        };
+
+        Cookies.set("userData", JSON.stringify(newState.userData), {
+          expires: 7,
+        });
+        return newState;
+      }
+
+      return state; // Return the original state if the task is not found
+    },
+    addATask: (state, action) => {
+      const taskArray = state.userData.collections.Tasks.slice(); // Create a shallow copy
+      taskArray.push(action.payload);
+      const newState = {
+        ...state,
+        userData: {
+          ...state.userData,
+          collections: {
+            ...state.userData.collections,
+            Tasks: taskArray,
+          },
+        },
+      };
+      Cookies.set("userData", JSON.stringify(newState.userData), {
+        expires: 7,
+      });
+      return newState;
+    },
   },
 });
 
@@ -71,6 +151,10 @@ export const {
   clearModal,
   updateModal,
   removeSubTask,
+  addNote,
+  removeNote,
+  setTaskComplete,
+  addATask,
 } = userSlice.actions;
 
 export default userSlice.reducer;

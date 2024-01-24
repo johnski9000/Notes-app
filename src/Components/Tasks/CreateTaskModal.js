@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import styles from "../Dashboard.module.css";
 import add from "../media/add.png";
 import close from "../media/close.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearModal,
-  setTaskComplete,
   removeSubTask,
   updateModal,
 } from "../../../Redux/userSlice";
@@ -15,32 +14,25 @@ import { useAuth } from "../../../Context/AuthContext";
 import remove from "../media/x-button.png";
 import ListModal from "../../../Components/Tasks/ListModal";
 
-function TaskModal({ props }) {
+function CreateTaskModal() {
   const dispatch = useDispatch();
   const auth = useAuth();
   const { modal } = useSelector((state) => state.userData);
   const subTaskRef = useRef(null);
   const formattedDueDate = () => {
     if (modal.due_date) {
-      if (modal.due_date instanceof Date) {
-        const isoDate = modal.due_date.toISOString();
-        const index = isoDate.indexOf("T");
-        return isoDate.slice(0, index);
-      } else if (modal.due_date._seconds) {
+      if (modal.due_date._seconds === undefined) {
+        return modal.due_date;
+      } else {
         const dueDate = new Date(
           modal.due_date._seconds * 1000 + modal.due_date._nanoseconds / 1000000
         );
         return dueDate.toISOString().split("T")[0];
-      } else {
-        // Handle other cases if needed
-        const index = modal.due_date.indexOf("T");
-        return modal.due_date.slice(0, index);
       }
     } else {
       return "";
     }
   };
-
   const deleteTask = () => {
     console.log(modal);
     axios
@@ -66,17 +58,6 @@ function TaskModal({ props }) {
         window.location.reload();
       });
   };
-  const completeTask = () => {
-    axios
-      .put(apiURLLocal + "/completeTask", {
-        email: auth.currentUser.email,
-        data: modal,
-      })
-      .then((response) => {
-        console.log(response);
-        dispatch(setTaskComplete(modal.id));
-      });
-  };
   return (
     <div className={styles.today_task_modal} id="no-scrollbar">
       <div className={styles.modal_title}>
@@ -86,7 +67,7 @@ function TaskModal({ props }) {
       <div className={styles.taskData}>
         <div className={styles.taskTitle}>
           <input
-            value={props.title || ""}
+            value={modal.title || ""}
             type="text"
             id="title"
             name="title"
@@ -97,7 +78,7 @@ function TaskModal({ props }) {
         </div>
         <div className={styles.description}>
           <textarea
-            value={props.description || ""}
+            value={modal.description || ""}
             type="text"
             id="description"
             name="description"
@@ -111,16 +92,15 @@ function TaskModal({ props }) {
         <div className={styles.date}>
           Due date
           <input
-            value={formattedDueDate() || ""}
-            // value={"2024-01-23T16:50:30.430Z"}
+            value={formattedDueDate()}
             type="date"
             id="date"
             name="date"
-            onChange={(e) => {
+            onChange={(e) =>
               dispatch(
                 updateModal({ value: e.target.value, title: "due_date" })
-              );
-            }}
+              )
+            }
           />
         </div>
         <ListModal list={modal.list} />
@@ -132,27 +112,25 @@ function TaskModal({ props }) {
               <img
                 src={add}
                 alt=""
-                onClick={() => {
+                onClick={() =>
                   dispatch(
                     updateModal({
                       value: subTaskRef.current.value,
                       title: "subTasks",
                     })
-                  );
-                }}
+                  )
+                }
               />
             </button>
             <input type="text" id="subTask" name="subTask" ref={subTaskRef} />
           </div>
           <div className={styles.subTaskWrapper} id="no-scrollbar">
-            {props.subTasks &&
-              props.subTasks.map((item, index) => (
+            {modal.subTasks &&
+              modal.subTasks.map((item, index) => (
                 <div
                   key={index}
                   className={styles.subTaskItem}
-                  onClick={() => {
-                    dispatch(removeSubTask(index));
-                  }}
+                  onClick={() => dispatch(removeSubTask(index))}
                 >
                   <img src={remove} alt="delete item" /> {item}
                 </div>
@@ -164,19 +142,8 @@ function TaskModal({ props }) {
         <button onClick={() => deleteTask()}>Delete Task</button>
         <button onClick={() => updateTask()}>Save Changes</button>
       </div>
-      <div className={styles.modal_button_complete}>
-        <button
-          onClick={() => {
-            console.log(props.id);
-            completeTask(props.id);
-            console.log(props);
-          }}
-        >
-          Complete Task
-        </button>
-      </div>
     </div>
   );
 }
 
-export default TaskModal;
+export default CreateTaskModal;

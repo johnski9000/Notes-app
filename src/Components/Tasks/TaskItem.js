@@ -7,7 +7,7 @@ function TaskItem({ task }) {
   const dispatch = useDispatch();
   return (
     <div
-      className="flex justify-between items-center h-10 px-4 bg-gray-100 rounded-md cursor-pointer"
+      className="flex justify-between items-center h-10 px-4 bg-gray-100 rounded-md cursor-pointer hover:bg-gray-200 transition-all"
       onClick={() => dispatch(setModal(task))}
     >
       <div>{task.title}</div>

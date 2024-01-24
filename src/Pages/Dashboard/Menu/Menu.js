@@ -7,7 +7,7 @@ import rightImg from "../media/right.png";
 import calenderImg from "../media/calendar.png";
 import stickyImg from "../media/sticky-note.png";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedElement } from "../../../Redux/userSlice";
+import { setModal, setSelectedElement } from "../../../Redux/userSlice";
 import MenuItem from "./MenuItem";
 import { useAuth } from "../../../Context/AuthContext";
 import logout from "../media/logout.png";
@@ -15,24 +15,23 @@ import add from "../media/add.png";
 import submit from "../media/arrow-right.png";
 import axios from "axios";
 import { setUserData } from "../../../Redux/userSlice";
-import remove from "../media/x-button.png";
 import { apiURLLocal } from "../../../Variables/const";
+import clear from "../media/close.png";
 
-function Menu({ openModal }) {
+function Menu() {
   const { signOut, currentUser } = useAuth();
   const { email } = currentUser ? currentUser._delegate : {};
   const [searchInput, setSearchInput] = useState();
   const [addList, setAddlist] = useState(false);
   const [list, setList] = useState({
-    color: "",
-    title: "Insert Title",
+    color: "black",
+    title: "",
   });
   const userState = useSelector((state) => state);
-  console.log(userState.userData);
-
-  const { collections } = userState.userData.userData;
-  const { Lists } = collections;
-
+  const collections = userState.userData.userData
+    ? userState.userData.userData.collections
+    : {};
+  const Lists = collections ? collections.Lists : [];
   function handleChangeSearch(e) {
     setSearchInput(e.target.value);
   }
@@ -44,20 +43,10 @@ function Menu({ openModal }) {
     dispatch(setSelectedElement(data));
   }
   const TaskItems = [
-    { name: "Create a task", image: rightImg },
+    // { name: "Create a task", image: rightImg },
     { name: "Tasks", image: listImg },
     { name: "Calendar", image: calenderImg },
     { name: "Sticky Notes", image: stickyImg },
-  ];
-  const ListColors = [
-    "#ff0000", // Red
-    "#00ff00", // Green
-    "#0000ff", // Blue
-    "#ffff00", // Yellow
-    "#ff00ff", // Magenta
-    "#00ffff", // Cyan
-    "#ff8000", // Orange
-    "#8000ff", // Purple
   ];
 
   function searchItem() {
@@ -123,14 +112,31 @@ function Menu({ openModal }) {
           <input
             type="text"
             id="search"
+            value={searchInput}
             onChange={(e) => handleChangeSearch(e)}
           />
         </div>
+        {searchInput && (
+          <img
+            src={clear}
+            alt="clear"
+            className="absolute w-3 h-3 right-[10px] hover:cursor-pointer"
+            onClick={() => setSearchInput("")}
+          />
+        )}
       </div>
       {searchInput ? (
-        <div className={styles.searchTab}>
+        <div className="p-[17px] flex flex-col gap-[15px]">
           {searchItem().map((item, index) => (
-            <div key={index} onClick={() => openModal(item)}>
+            <div
+              key={index}
+              onClick={() => dispatch(setModal(item))}
+              className="rounded-xl bg-[#e7e7e7] justify-center items-center p-[7px] shadow-xl hover:cursor-pointer transform hover:scale-105 transition-transform duration-300"
+            >
+              {/* <span className="font-bold inline-flex justify-start items-start">
+                Title -
+              </span>
+              &nbsp; */}
               {item.title}
             </div>
           ))}
@@ -138,7 +144,7 @@ function Menu({ openModal }) {
       ) : (
         <div>
           <div className={styles.taskListContainer}>
-            <div className={styles.tasksTitle}>Tasks</div>
+            {/* <div className={styles.tasksTitle}>Tasks</div> */}
             <ul className={styles.taskList}>
               {TaskItems.map((item, index) => (
                 <div key={index}>
@@ -183,18 +189,19 @@ function Menu({ openModal }) {
               {addList && (
                 <div className={styles.addListContainer}>
                   <div className={styles.addList}>
-                    <div
-                      style={{
-                        backgroundColor: list.color,
-                        minWidth: "20px",
-                        height: "20px",
-                      }}
+                    <input
+                      type="color"
+                      className="w-10"
+                      value={list.color}
+                      onChange={(e) =>
+                        setList({ ...list, color: e.target.value })
+                      }
                     />
-                    <input type="color" />
                     <input
                       type="text"
                       className={styles.addListTitle}
                       value={list.title}
+                      placeholder="Insert Title"
                       onChange={(e) =>
                         setList({ ...list, title: e.target.value })
                       }
@@ -204,20 +211,6 @@ function Menu({ openModal }) {
                       alt="submit list"
                       onClick={(e) => submitList(e)}
                     />
-                  </div>
-                  <div className={styles.colorContainer}>
-                    {ListColors.map((item, index) => (
-                      <div
-                        onClick={() => setList({ ...list, color: item })}
-                        key={index}
-                        style={{
-                          backgroundColor: item,
-                          flex: "1",
-                          height: "20px",
-                          borderRadius: "4px",
-                        }}
-                      ></div>
-                    ))}
                   </div>
                 </div>
               )}

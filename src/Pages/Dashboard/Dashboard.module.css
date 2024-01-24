@@ -48,6 +48,7 @@
   display: flex;
   align-items: center;
   padding: 0px 7px;
+  position: relative;
 }
 
 .searchImg {
@@ -155,6 +156,7 @@
   border: 1px solid rgb(229, 229, 229);
   border-radius: 5px;
   position: relative;
+  background-color: white;
 }
 .addTaskModal button {
   width: 50px;
@@ -164,7 +166,7 @@
   background-color: unset;
   border: unset;
   position: absolute;
-  right: 0;
+  right: -10px;
   bottom: 0;
   top: 0;
 }
@@ -224,7 +226,7 @@
   }
   .taskData {
     max-height: 80%;
-    overflow: scroll;
+    /* overflow: scroll; */
   }
 }
 .today_task_modal {
@@ -274,8 +276,27 @@
   display: flex;
   gap: 10px;
   left: 0;
+  bottom: 90px;
+  justify-content: center;
+}
+.modal_button_complete {
+  position: sticky;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  left: 0;
   bottom: 30px;
   justify-content: center;
+}
+.modal_button_complete button {
+  flex: 1;
+  font-weight: bold;
+  padding: 4px 0;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  height: 40px;
+  color: white;
+  background-color: rgb(31, 212, 55);
 }
 .modal_buttons button {
   flex: 1;
@@ -327,7 +348,7 @@
 .taskTitle input {
   margin-top: 20px;
   flex: 1;
-  background-color: unset;
+  background-color: white;
   border: 1px solid rgb(203, 203, 203);
   color: rgb(84, 84, 84);
   padding: 8px 0px 8px 10px;
@@ -339,7 +360,7 @@
 .description textarea {
   margin-top: 20px;
   flex: 1;
-  background-color: unset;
+  background-color: white;
   border: 1px solid rgb(203, 203, 203);
   color: rgb(84, 84, 84);
   padding: 8px 0px 8px 10px;
@@ -358,7 +379,7 @@
   border: unset;
   color: rgb(84, 84, 84);
   width: fit-content;
-  background: #f4f4f4;
+  background: white;
   border: 1px solid rgb(203, 203, 203);
   padding: 4px;
   border-radius: 10px;
@@ -368,6 +389,9 @@
   margin-bottom: 20px;
   border: unset;
   color: rgb(84, 84, 84);
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 .logout {
   width: 100px;
@@ -416,7 +440,7 @@
   flex-flow: column;
 }
 .subTaskWrapper {
-  height: 200px;
+  height: 160px;
   overflow: scroll;
   padding: 15px;
   margin-top: 20px;
@@ -465,9 +489,7 @@
   height: auto;
   border: 1px solid rgb(211, 211, 211);
   border-radius: 20px;
-  padding: 20px;
-  overflow-y: scroll;
-  overflow-x: hidden !important;
+  padding: 10px;
 }
 .colorContainer {
   margin-top: 20px;
