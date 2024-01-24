@@ -22,7 +22,7 @@ function Menu() {
   const { signOut, currentUser } = useAuth();
   const { email } = currentUser ? currentUser._delegate : {};
   const [searchInput, setSearchInput] = useState();
-  const [addList, setAddlist] = useState(false);
+  const [addList, setAddlist] = useState(true);
   const [list, setList] = useState({
     color: "black",
     title: "",

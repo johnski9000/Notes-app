@@ -24,10 +24,10 @@
 }
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(-100%);
+    margin-left: -300px;
   }
   100% {
-    transform: translateX(0);
+    margin-left: 0px;
   }
 }
 @media screen and (max-width: 768px) {
